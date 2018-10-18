@@ -1,0 +1,59 @@
+# Reading C:/intelFPGA_lite/17.1/modelsim_ase/tcl/vsim/pref.tcl
+# do Coder_Interleaver_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/17.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver {C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:19:54 on Oct 18,2018
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver" C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v 
+# -- Compiling module coder_interleaver
+# 
+# Top level modules:
+# 	coder_interleaver
+# End time: 12:19:54 on Oct 18,2018, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver {C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:19:54 on Oct 18,2018
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver" C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v 
+# -- Compiling module dummy_top
+# 
+# Top level modules:
+# 	dummy_top
+# End time: 12:19:54 on Oct 18,2018, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver {C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/turbo_tb.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:19:54 on Oct 18,2018
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver" C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/turbo_tb.v 
+# -- Compiling module turbo_tb
+# 
+# Top level modules:
+# 	turbo_tb
+# End time: 12:19:55 on Oct 18,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  turbo_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" turbo_tb 
+# Start time: 12:19:56 on Oct 18,2018
+# Loading work.turbo_tb
+# Loading work.coder_interleaver
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# << Starting the Simulation >>
+# End time: 16:15:13 on Oct 18,2018, Elapsed time: 3:55:17
+# Errors: 0, Warnings: 0

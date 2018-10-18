@@ -1,0 +1,11 @@
+
+module dummy_top();
+
+coder_interleaver test (
+		.cin(A),
+		.K_eq_6144(k),
+		.cout(B)
+	);
+	
+	
+endmodule 
