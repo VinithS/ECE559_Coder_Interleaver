@@ -1,8 +1,7 @@
-|dummy_top
-dum_out <= coder_interleaver:dummy_inst.cout
+|coder_interleaver_tb
 
 
-|dummy_top|coder_interleaver:dummy_inst
+|coder_interleaver_tb|coder_interleaver:interleaver_inst
 cin[0] => cout[0].DATAIN
 cin[1] => cout.DATAB
 cin[1] => cout.DATAA
