@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Coder_Interleaver
-Wed Oct 31 14:59:27 2018
+Wed Oct 31 15:27:27 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -10,7 +10,15 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Parameter Settings for User Entity Instance: coder_interleaver:dummy_inst
+ 10. Port Connectivity Checks: "coder_interleaver:dummy_inst"
+ 11. Post-Synthesis Netlist Statistics for Top Partition
+ 12. Elapsed Time Per Partition
+ 13. Analysis & Synthesis Messages
 
 
 
@@ -33,22 +41,27 @@ refer to the applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Wed Oct 31 14:59:27 2018           ;
-; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name               ; Coder_Interleaver                           ;
-; Top-level Entity Name       ; dummy_top                                   ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Wed Oct 31 15:27:27 2018       ;
+; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                   ; Coder_Interleaver                           ;
+; Top-level Entity Name           ; dummy_top                                   ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 1                                           ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -154,18 +167,126 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                               ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                 ; Library ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------+---------+
+; dummy_top.v                      ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v         ;         ;
+; coder_interleaver.v              ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v ;         ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimate of Logic utilization (ALMs needed) ; 0              ;
+;                                             ;                ;
+; Combinational ALUT usage for logic          ; 0              ;
+;     -- 7 input functions                    ; 0              ;
+;     -- 6 input functions                    ; 0              ;
+;     -- 5 input functions                    ; 0              ;
+;     -- 4 input functions                    ; 0              ;
+;     -- <=3 input functions                  ; 0              ;
+;                                             ;                ;
+; Dedicated logic registers                   ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 1              ;
+;                                             ;                ;
+; Total DSP Blocks                            ; 0              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; dum_out~output ;
+; Maximum fan-out                             ; 1              ;
+; Total fan-out                               ; 1              ;
+; Average fan-out                             ; 0.50           ;
++---------------------------------------------+----------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; |dummy_top                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 1    ; 0            ; |dummy_top          ; dummy_top   ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: coder_interleaver:dummy_inst ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; f1_6144        ; 263   ; Signed Integer                                   ;
+; f1_1056        ; 17    ; Signed Integer                                   ;
+; f2_6144        ; 480   ; Signed Integer                                   ;
+; f2_1056        ; 66    ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "coder_interleaver:dummy_inst"                                                                   ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; cout[6143..6001] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; cout[5999..0]    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_lcell_comb     ; 1                           ;
+;     normal            ; 1                           ;
+;         0 data inputs ; 1                           ;
+; boundary_port         ; 1                           ;
+;                       ;                             ;
+; Max LUT depth         ; 0.00                        ;
+; Average LUT depth     ; 0.00                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Wed Oct 31 14:59:14 2018
+    Info: Processing started: Wed Oct 31 15:27:10 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Coder_Interleaver -c Coder_Interleaver
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file mux6144.v
-    Info (12023): Found entity 1: mux6144 File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 1
+Warning (12019): Can't analyze file -- file mux6144.v is missing
 Info (12021): Found 1 design units, including 1 entities, in source file ind_gen.v
     Info (12023): Found entity 1: ind_gen File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/ind_gen.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file top_level.v
@@ -180,35 +301,19 @@ Info (12021): Found 1 design units, including 1 entities, in source file coder_i
     Info (12023): Found entity 1: coder_interleaver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file shiftreg_6144.v
     Info (12023): Found entity 1: shiftreg_6144 File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/shiftreg_6144.v Line: 2
-Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(19179): created implicit net for "r7_161" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 19179
-Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(19340): created implicit net for "r8_81" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 19340
-Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(19381): created implicit net for "r9_21" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 19381
-Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(19402): created implicit net for "r10_11" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 19402
-Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(19413): created implicit net for "r11_6" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 19413
-Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(19422): created implicit net for "r13_2" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 19422
-Error (10161): Verilog HDL error at mux6144.v(10766): object "r2_1538" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10766
-Error (10161): Verilog HDL error at mux6144.v(10766): object "r2_1537" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10766
-Error (10161): Verilog HDL error at mux6144.v(10768): object "r2_1540" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10768
-Error (10161): Verilog HDL error at mux6144.v(10768): object "r2_1539" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10768
-Error (10161): Verilog HDL error at mux6144.v(10770): object "r2_1542" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10770
-Error (10161): Verilog HDL error at mux6144.v(10770): object "r2_1541" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10770
-Error (10161): Verilog HDL error at mux6144.v(10772): object "r2_1544" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10772
-Error (10161): Verilog HDL error at mux6144.v(10772): object "r2_1543" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10772
-Error (10161): Verilog HDL error at mux6144.v(10774): object "r2_1546" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10774
-Error (10161): Verilog HDL error at mux6144.v(10774): object "r2_1545" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10774
-Error (10161): Verilog HDL error at mux6144.v(10776): object "r2_1548" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10776
-Error (10161): Verilog HDL error at mux6144.v(10776): object "r2_1547" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10776
-Error (10161): Verilog HDL error at mux6144.v(10778): object "r2_1550" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10778
-Error (10161): Verilog HDL error at mux6144.v(10778): object "r2_1549" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10778
-Error (10161): Verilog HDL error at mux6144.v(10780): object "r2_1552" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10780
-Error (10161): Verilog HDL error at mux6144.v(10780): object "r2_1551" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10780
-Error (10161): Verilog HDL error at mux6144.v(10782): object "r2_1554" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10782
-Error (10161): Verilog HDL error at mux6144.v(10782): object "r2_1553" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10782
-Error (10161): Verilog HDL error at mux6144.v(10784): object "r2_1556" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 10784
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 19 errors, 7 warnings
-    Error: Peak virtual memory: 4812 megabytes
-    Error: Processing ended: Wed Oct 31 14:59:27 2018
-    Error: Elapsed time: 00:00:13
-    Error: Total CPU time (on all processors): 00:00:28
+Info (12127): Elaborating entity "dummy_top" for the top level hierarchy
+Info (12128): Elaborating entity "coder_interleaver" for hierarchy "coder_interleaver:dummy_inst" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v Line: 17
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "dum_out" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v Line: 2
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 1 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 0 input pins
+    Info (21059): Implemented 1 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 4840 megabytes
+    Info: Processing ended: Wed Oct 31 15:27:27 2018
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:32
 
 
