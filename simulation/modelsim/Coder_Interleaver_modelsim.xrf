@@ -1,0 +1,9 @@
+vendor_name = ModelSim
+source_file = 1, C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/turbo_tb.v
+source_file = 1, C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/input_shifter.v
+source_file = 1, C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v
+source_file = 1, C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v
+source_file = 1, C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/db/Coder_Interleaver.cbx.xml
+design_name = dummy_top
+instance = comp, \dum_out~output , dum_out~output, dummy_top, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, dummy_top, 1
