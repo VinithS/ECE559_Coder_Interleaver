@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Wed Oct 31 12:55:53 2018
-Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Analysis & Synthesis Status : Successful - Wed Oct 31 15:07:10 2018
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Standard Edition
 Revision Name : Coder_Interleaver
-Top-level Entity Name : dummy_top
+Top-level Entity Name : shift_reg_tester
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 0
-Total pins : 1
+Total registers : 100
+Total pins : 110
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 0
