@@ -1,11 +1,11 @@
 module mux6144(
-arr[6143:0],
-in[13:0],
+arr,
+in,
 r
 );
 
-input in[13:0];
-input arr[6143:0];
+input [13:0] in;
+input [6143:0] arr;
 
 output r;
 

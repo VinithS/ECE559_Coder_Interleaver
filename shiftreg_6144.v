@@ -10,3 +10,5 @@ module shiftreg_6144(aclr,
 	input	  [7:0] shiftin;
 	output	[6143:0]  q;
 	output	  shiftout;
+
+endmodule
