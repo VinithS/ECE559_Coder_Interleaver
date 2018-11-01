@@ -12294,6 +12294,7 @@ wire r11_3;
 assign r11_3 = ind[10]? r10_6 : r10_5;
 wire r12_1;
 assign r12_1 = ind[11]? r11_2 : r11_1;
+wire r12_2;
 assign r12_2 = r11_3;
 wire r;
 assign r = ind[12]? r12_2 : r12_1;

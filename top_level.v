@@ -29,7 +29,12 @@ module top_level(
 	assign shift_reg_out = shift_reg_out1;
 	// wire [7:0]
 	//**********to do in the future, have 2 shiftreg to 
-	shiftreg_6144 input_shiftreg_inst1(.aclr(clear), .clock(clk), .shiftin(databit_in1), .q(shift_reg_out1), .shiftout());
+	shiftreg_6144 input_shiftreg_inst1(.aclr(clear),
+												  .clk(clk),
+												  .shiftin(databit_in1),
+												  .q_6144(shift_reg_out1),
+											     .shiftout()
+												  );
 	
 	// // bitserial shift wires
 	// wire  reg1out,  reg2out,  reg3out,  reg4out,  reg5out,  reg6out,  reg7out,  reg8out,  reg9out, reg10out;
@@ -38,23 +43,51 @@ module top_level(
 	
 	//remapping module
 	//*********passive module, unless a bug is spotted, it's done**************
-	wire [6143:0] remap_in,remap_out;
+	wire [6143:0] remap_in, remap_out;
 	assign remap_in = shift_reg_out;
-	coder_interleaver ci_inst(.cin(remap_in),.K_eq_6144(k_size_6144),.cout(remap_out));
+	coder_interleaver ci_inst(.cin(remap_in),
+									  .K_eq_6144(k_size_6144),
+									  .cout(remap_out)
+									  );
 
 	//counter
 	//*******module to be finish and tested***********
 	wire [13:0] mux_ind;
-	ind_gen counter(.clock(clk), .k(k_size_6144) ,.ready(ready_in), .reset(clear), .out(mux_ind));
+	ind_gen counter(.clock(clk),
+						 .k(k_size_6144),
+						 .ready(ready_in),
+						 .reset(clear),
+						 .out(mux_ind)
+						 );
 
 	//mux
 	//*******module to be finish and tested***********
-	wire [6143:0] ci_array,cpii_array;
-	assign ci_array=shift_reg_out;
-	assign cpii_array=remap_out;
+	wire [6143:0] ci_array, cpii_array;
+	assign ci_array = shift_reg_out;
+	assign cpii_array = remap_out;
 
-	mux6144 ci_mux(.arr(ci_array),.ind(mux_ind),.r(outi));
-	mux6144 cpii_mux(.arr(cpii_array),.ind(mux_ind),.r(outpii));
+	mux6144 ci_mux(.arr(ci_array),
+						.ind(mux_ind),
+						.r(outi)
+						);
+	mux6144 cpii_mux(.arr(cpii_array),
+						  .ind(mux_ind),
+						  .r(outpii)
+						  );
+						  
+	assign LEDR0 = remap_out[0];
+	assign LEDR1 = remap_out[1];
+	assign LEDR2 = remap_out[2];
+	assign LEDR3 = remap_out[3];
+	assign LEDR4 = remap_out[4];
+	assign LEDR5 = remap_out[5];
+	assign LEDR6 = remap_out[6];
+	assign LEDR7 = remap_out[7];
+	assign LEDR8 = remap_out[8];
+	assign LEDR9 = remap_out[9];
+	assign LEDR10 = remap_out[10];
+
+	
 	// // data wires
 	// wire[255:0]  reg1dat,  reg2dat,  reg3dat,  reg4dat,  reg5dat,  reg6dat,  reg7dat,  reg8dat,  reg9dat, reg10dat;
 	// wire[255:0] reg11dat, reg12dat, reg13dat, reg14dat, reg15dat, reg16dat, reg17dat, reg18dat, reg19dat, reg20dat;

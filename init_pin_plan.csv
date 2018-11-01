@@ -1,0 +1,45 @@
+# Copyright (C) 2018  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details.
+
+# Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+# File: C:\Users\Vinith Sharma\Google_Drive\Duke University\7th Semester\ECE_559\Project\ECE559_Coder_Interleaver\init_pin_plan.csv
+# Generated on: Thu Nov 01 03:40:41 2018
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Transceiver Analog Settings Protocol,VCCR_GXB/VCCT_GXB Voltage,Transceiver I/O Pin Termination,Transceiver Dedicated Refclk Pin Termination,Transmitter Common Mode Driver Voltage,Transmitter Slew Rate Control,Transmitter Differential Output Voltage,Receiver Buffer Common Mode Voltage,Strict Preservation
+CLOCK_50,Input,PIN_m6,3A,B3A_N0,,,,,,,,,,,,,,
+KEY_0,Input,PIN_u7,3A,B3A_N0,,,,,,,,,,,,,,
+LEDR0,Output,PIN_aa2,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR1,Output,PIN_aa1,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR2,Output,PIN_w2,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR3,Output,PIN_y3,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR4,Output,PIN_n2,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR5,Output,PIN_n1,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR6,Output,PIN_u2,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR7,Output,PIN_u1,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR8,Output,PIN_l2,2A,B2A_N0,,,,,,,,,,,,,,
+LEDR9,Output,PIN_l1,2A,B2A_N0,,,,,,,,,,,,,,
+databit_in1[7],Input,PIN_aa13,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[6],Input,PIN_aa14,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[5],Input,PIN_AB15,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[4],Input,PIN_AA15,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[3],Input,PIN_T12,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[2],Input,PIN_T13,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[1],Input,PIN_v13,4A,B4A_N0,,,,,,,,,,,,,,
+databit_in1[0],Input,PIN_u13,4A,B4A_N0,,,,,,,,,,,,,,
+k_size_6144,Input,PIN_ab12,4A,B4A_N0,,,,,,,,,,,,,,
+outi,Output,,,,,,,,,,,,,,,,,
+outpii,Output,,,,,,,,,,,,,,,,,
+ready_in,Input,PIN_ab13,4A,B4A_N0,,,,,,,,,,,,,,

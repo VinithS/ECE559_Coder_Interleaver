@@ -15,3 +15,5 @@ greybox_tmp
 !*.txt
 !*.png
 !*.vwf
+!*.csv
+!*.sof
