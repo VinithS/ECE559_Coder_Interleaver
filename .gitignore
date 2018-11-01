@@ -1,0 +1,17 @@
+#ignore all kind of files
+*.*
+incremental_db
+simulation
+db
+greybox_tmp
+
+#except verilog and test files
+!.gitignore
+!*.v
+!*.qpf
+!*.md
+!Vinith
+!Yao
+!*.txt
+!*.png
+!*.vwf
