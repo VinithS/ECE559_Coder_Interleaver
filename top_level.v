@@ -1,13 +1,28 @@
 module top_level_interleaver(
 	input k_size_6144,      // 0 if 1056, 1 if 6144 block size
 	input [7:0] databit_in1,  // bite-wise serial input
-	input clk,         // clock  
+	input CLOCK_50,         // clock , or do we want to do manual clock?
 	input ready_in,       // start out put serial stream
-	input clear,
+	input KEY_0, //active low: pushed=0, using for reset/clear
+	output LEDR0, //to be determined how to use these
+	output LEDR1, 
+	output LEDR2, 
+	output LEDR3, 
+	output LEDR4, 
+	output LEDR5, 
+	output LEDR6, 
+	output LEDR7, 
+	output LEDR8, 
+	output LEDR9, 
 	output outi, // bitserial output using the same sequence as input
 	output outpii // bitserial output after remapping
 	);
 	
+	wire clk;
+	assign clk = CLOCK_50;
+
+	wire clear;
+	assign clear = ~KEY_0;
 
 	// shift register taking in byte-wise input
 	wire [6143:0] shift_reg_out,shift_reg_out1;
