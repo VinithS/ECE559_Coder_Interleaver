@@ -1,0 +1,23 @@
+RLED9-0, 0 is the right most LED (page 12)
+
+Table 3-4 Pin Assignment of LEDs (page 26)
+Signal Name FPGA Pin No. Description
+LEDR0 PIN_AA2 LED [0]
+LEDR1 PIN_AA1 LED [1]
+LEDR2 PIN_W2 LED [2]
+LEDR3 PIN_Y3 LED [3]
+LEDR4 PIN_N2 LED [4]
+LEDR5 PIN_N1 LED [5]
+LEDR6 PIN_U2 LED [6]
+LEDR7 PIN_U1 LED [7]
+LEDR8 PIN_L2 LED [8]
+LEDR9 PIN_L1 LED [9]
+
+We are using LEDR9-R
+
+Table 3-6 Pin Assignment of Clock Inputs
+Signal Name FPGA Pin No. Description
+CLOCK_50 PIN_M9 50 MHz clock input(Bank 3B)
+CLOCK2_50 PIN_H13 50 MHz clock input(Bank 7A)
+CLOCK3_50 PIN_E10 50 MHz clock input(Bank 8A)
+CLOCK4_50 PIN_V15 50 MHz clock input(Bank 4A)

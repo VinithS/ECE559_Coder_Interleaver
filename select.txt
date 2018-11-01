@@ -1,9 +1,12 @@
 module select(
-in[0:6143],
+arr[0:6143],
+in[0:13],
 r
 );
 
-input in[0:6143];
+input in[0:13];
+input arr[0:6143];
+
 output r;
 
 

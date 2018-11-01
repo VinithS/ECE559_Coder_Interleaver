@@ -18,6 +18,7 @@ module shiftreg_6144(
 		else begin
 			mem <= {shiftin, mem[6143:8]};
 
+<<<<<<< HEAD
 		end
 	end
 	
@@ -25,4 +26,18 @@ module shiftreg_6144(
 	assign q_1056 = mem[6143:5088];
 	assign shiftout = mem[7:0];
 	
+=======
+module shiftreg_6144(aclr,
+	clock,
+	shiftin,
+	q,
+	shiftout);
+
+	input	  aclr;
+	input	  clock;
+	input	  [7:0] shiftin;
+	output	[6143:0]  q;
+	output	  shiftout;
+
+>>>>>>> master
 endmodule
