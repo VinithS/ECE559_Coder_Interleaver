@@ -1,13 +1,13 @@
-Fitter Status : Successful - Wed Oct 31 15:28:14 2018
+Fitter Status : Successful - Thu Nov 01 00:16:24 2018
 Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : Coder_Interleaver
-Top-level Entity Name : dummy_top
+Top-level Entity Name : top_level
 Family : Cyclone V
 Device : 5CGXFC7C7F23C8
 Timing Models : Final
 Logic utilization (in ALMs) : 1 / 56,480 ( < 1 % )
 Total registers : 0
-Total pins : 1 / 268 ( < 1 % )
+Total pins : 24 / 268 ( 9 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 7,024,640 ( 0 % )
 Total RAM Blocks : 0 / 686 ( 0 % )

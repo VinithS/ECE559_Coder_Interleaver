@@ -1,4 +1,4 @@
-module top_level_interleaver(
+module top_level(
 	input k_size_6144,      // 0 if 1056, 1 if 6144 block size
 	input [7:0] databit_in1,  // bite-wise serial input
 	input CLOCK_50,         // clock , or do we want to do manual clock?
@@ -51,7 +51,7 @@ module top_level_interleaver(
 	//*******module to be finish and tested***********
 	wire [6143:0] ci_array,cpii_array;
 	assign ci_array=shift_reg_out;
-	assign ci_array=remap_out;
+	assign cpii_array=remap_out;
 
 	mux6144 ci_mux(.arr(ci_array),.ind(mux_ind),.r(outi));
 	mux6144 cpii_mux(.arr(cpii_array),.ind(mux_ind),.r(outpii));

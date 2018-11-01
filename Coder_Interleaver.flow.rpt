@@ -1,5 +1,5 @@
 Flow report for Coder_Interleaver
-Wed Oct 31 15:28:47 2018
+Thu Nov 01 00:17:00 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -40,16 +40,16 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Wed Oct 31 15:28:47 2018       ;
+; Flow Status                     ; Successful - Thu Nov 01 00:17:00 2018       ;
 ; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                   ; Coder_Interleaver                           ;
-; Top-level Entity Name           ; dummy_top                                   ;
+; Top-level Entity Name           ; top_level                                   ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CGXFC7C7F23C8                              ;
 ; Timing Models                   ; Final                                       ;
 ; Logic utilization (in ALMs)     ; 1 / 56,480 ( < 1 % )                        ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 1 / 268 ( < 1 % )                           ;
+; Total pins                      ; 24 / 268 ( 9 % )                            ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0 / 7,024,640 ( 0 % )                       ;
 ; Total DSP Blocks                ; 0 / 156 ( 0 % )                             ;
@@ -67,7 +67,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/31/2018 15:27:11 ;
+; Start date & time ; 11/01/2018 00:15:29 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Coder_Interleaver   ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+----------------------------------------+-------------------+-------------+----------------+
 ; Assignment Name                      ; Value                                  ; Default Value     ; Entity Name ; Section Id     ;
 +--------------------------------------+----------------------------------------+-------------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 174508013118851.154101403141600        ; --                ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 174508013118851.154104572836780        ; --                ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --                ; --          ; Yao_tb         ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; Yao_tb                                 ; --                ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Verilog Hdl                            ; --                ; --          ; eda_simulation ;
@@ -90,12 +90,12 @@ refer to the applicable agreement for further details.
 ; EDA_TIME_SCALE                       ; 1 ps                                   ; --                ; --          ; eda_simulation ;
 ; MAX_CORE_JUNCTION_TEMP               ; 85                                     ; --                ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP               ; 0                                      ; --                ; --          ; --             ;
-; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --                ; dummy_top   ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --                ; dummy_top   ; Top            ;
-; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --                ; dummy_top   ; Top            ;
+; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --                ; top_level   ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --                ; top_level   ; Top            ;
+; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --                ; top_level   ; Top            ;
 ; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                    ; --                ; --          ; --             ;
 ; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                ; --          ; --             ;
-; TOP_LEVEL_ENTITY                     ; dummy_top                              ; Coder_Interleaver ; --          ; --             ;
+; TOP_LEVEL_ENTITY                     ; top_level                              ; Coder_Interleaver ; --          ; --             ;
 +--------------------------------------+----------------------------------------+-------------------+-------------+----------------+
 
 
@@ -104,12 +104,12 @@ refer to the applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:16     ; 1.0                     ; 4825 MB             ; 00:00:32                           ;
-; Fitter                    ; 00:00:45     ; 1.0                     ; 6756 MB             ; 00:01:06                           ;
-; Assembler                 ; 00:00:17     ; 1.0                     ; 4848 MB             ; 00:00:10                           ;
-; TimeQuest Timing Analyzer ; 00:00:09     ; 1.0                     ; 5151 MB             ; 00:00:08                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4749 MB             ; 00:00:02                           ;
-; Total                     ; 00:01:28     ; --                      ; --                  ; 00:01:58                           ;
+; Analysis & Synthesis      ; 00:00:18     ; 1.0                     ; 4871 MB             ; 00:00:34                           ;
+; Fitter                    ; 00:00:36     ; 1.0                     ; 6688 MB             ; 00:01:02                           ;
+; Assembler                 ; 00:00:17     ; 1.0                     ; 4846 MB             ; 00:00:11                           ;
+; TimeQuest Timing Analyzer ; 00:00:10     ; 1.0                     ; 5160 MB             ; 00:00:09                           ;
+; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 4751 MB             ; 00:00:02                           ;
+; Total                     ; 00:01:23     ; --                      ; --                  ; 00:01:58                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

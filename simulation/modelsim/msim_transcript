@@ -2151,3 +2151,5 @@
 # ** Note: $stop    : C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/Yao/bitwise_tb.v(95)
 #    Time: 21220 ns  Iteration: 0  Instance: /turbo_tb
 # Break in Module turbo_tb at C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/Yao/bitwise_tb.v line 95
+# End time: 16:00:00 on Oct 31,2018, Elapsed time: 2:26:40
+# Errors: 0, Warnings: 0

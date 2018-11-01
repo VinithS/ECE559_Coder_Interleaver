@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Coder_Interleaver
-Wed Oct 31 15:27:27 2018
+Thu Nov 01 00:15:46 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -13,12 +13,14 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Parameter Settings for User Entity Instance: coder_interleaver:dummy_inst
- 10. Port Connectivity Checks: "coder_interleaver:dummy_inst"
- 11. Post-Synthesis Netlist Statistics for Top Partition
- 12. Elapsed Time Per Partition
- 13. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Parameter Settings for User Entity Instance: coder_interleaver:ci_inst
+ 12. Port Connectivity Checks: "shiftreg_6144:input_shiftreg_inst1"
+ 13. Post-Synthesis Netlist Statistics for Top Partition
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -44,14 +46,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Oct 31 15:27:27 2018       ;
+; Analysis & Synthesis Status     ; Successful - Thu Nov 01 00:15:46 2018       ;
 ; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                   ; Coder_Interleaver                           ;
-; Top-level Entity Name           ; dummy_top                                   ;
+; Top-level Entity Name           ; top_level                                   ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 1                                           ;
+; Total pins                      ; 24                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -70,7 +72,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
-; Top-level entity name                                                           ; dummy_top          ; Coder_Interleaver  ;
+; Top-level entity name                                                           ; top_level          ; Coder_Interleaver  ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
@@ -172,36 +174,39 @@ refer to the applicable agreement for further details.
 +----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                 ; Library ;
 +----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------+---------+
-; dummy_top.v                      ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v         ;         ;
+; mux6144.v                        ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v           ;         ;
+; ind_gen.v                        ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/ind_gen.v           ;         ;
+; top_level.v                      ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v         ;         ;
 ; coder_interleaver.v              ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v ;         ;
+; shiftreg_6144.v                  ; yes             ; User Verilog HDL File  ; C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/shiftreg_6144.v     ;         ;
 +----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------+---------+
 
 
-+--------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                  ;
-+---------------------------------------------+----------------+
-; Resource                                    ; Usage          ;
-+---------------------------------------------+----------------+
-; Estimate of Logic utilization (ALMs needed) ; 0              ;
-;                                             ;                ;
-; Combinational ALUT usage for logic          ; 0              ;
-;     -- 7 input functions                    ; 0              ;
-;     -- 6 input functions                    ; 0              ;
-;     -- 5 input functions                    ; 0              ;
-;     -- 4 input functions                    ; 0              ;
-;     -- <=3 input functions                  ; 0              ;
-;                                             ;                ;
-; Dedicated logic registers                   ; 0              ;
-;                                             ;                ;
-; I/O pins                                    ; 1              ;
-;                                             ;                ;
-; Total DSP Blocks                            ; 0              ;
-;                                             ;                ;
-; Maximum fan-out node                        ; dum_out~output ;
-; Maximum fan-out                             ; 1              ;
-; Total fan-out                               ; 1              ;
-; Average fan-out                             ; 0.50           ;
-+---------------------------------------------+----------------+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimate of Logic utilization (ALMs needed) ; 0           ;
+;                                             ;             ;
+; Combinational ALUT usage for logic          ; 0           ;
+;     -- 7 input functions                    ; 0           ;
+;     -- 6 input functions                    ; 0           ;
+;     -- 5 input functions                    ; 0           ;
+;     -- 4 input functions                    ; 0           ;
+;     -- <=3 input functions                  ; 0           ;
+;                                             ;             ;
+; Dedicated logic registers                   ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 24          ;
+;                                             ;             ;
+; Total DSP Blocks                            ; 0           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; k_size_6144 ;
+; Maximum fan-out                             ; 1           ;
+; Total fan-out                               ; 24          ;
+; Average fan-out                             ; 0.50        ;
++---------------------------------------------+-------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -209,9 +214,29 @@ refer to the applicable agreement for further details.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |dummy_top                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 1    ; 0            ; |dummy_top          ; dummy_top   ; work         ;
+; |top_level                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 24   ; 0            ; |top_level          ; top_level   ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------------------+
+; Registers Removed During Synthesis                          ;
++----------------------------------------+--------------------+
+; Register name                          ; Reason for Removal ;
++----------------------------------------+--------------------+
+; ind_gen:counter|cnt[0..13]             ; Lost fanout        ;
+; Total Number of Removed Registers = 14 ;                    ;
++----------------------------------------+--------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                             ;
++------------------------+--------------------+---------------------------------------------------------------------------+
+; Register name          ; Reason for Removal ; Registers Removed due to This Register                                    ;
++------------------------+--------------------+---------------------------------------------------------------------------+
+; ind_gen:counter|cnt[0] ; Lost Fanouts       ; ind_gen:counter|cnt[12], ind_gen:counter|cnt[10], ind_gen:counter|cnt[9], ;
+;                        ;                    ; ind_gen:counter|cnt[8], ind_gen:counter|cnt[7], ind_gen:counter|cnt[6]    ;
++------------------------+--------------------+---------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -229,27 +254,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: coder_interleaver:dummy_inst ;
-+----------------+-------+--------------------------------------------------+
-; Parameter Name ; Value ; Type                                             ;
-+----------------+-------+--------------------------------------------------+
-; f1_6144        ; 263   ; Signed Integer                                   ;
-; f1_1056        ; 17    ; Signed Integer                                   ;
-; f2_6144        ; 480   ; Signed Integer                                   ;
-; f2_1056        ; 66    ; Signed Integer                                   ;
-+----------------+-------+--------------------------------------------------+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: coder_interleaver:ci_inst ;
++----------------+-------+-----------------------------------------------+
+; Parameter Name ; Value ; Type                                          ;
++----------------+-------+-----------------------------------------------+
+; f1_6144        ; 263   ; Signed Integer                                ;
+; f1_1056        ; 17    ; Signed Integer                                ;
+; f2_6144        ; 480   ; Signed Integer                                ;
+; f2_1056        ; 66    ; Signed Integer                                ;
++----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "coder_interleaver:dummy_inst"                                                                   ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port             ; Type   ; Severity ; Details                                                                             ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; cout[6143..6001] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; cout[5999..0]    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "shiftreg_6144:input_shiftreg_inst1" ;
++----------+--------+----------+---------------------------------+
+; Port     ; Type   ; Severity ; Details                         ;
++----------+--------+----------+---------------------------------+
+; shiftout ; Output ; Info     ; Explicitly unconnected          ;
++----------+--------+----------+---------------------------------+
 
 
 +-----------------------------------------------------+
@@ -260,7 +284,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; arriav_lcell_comb     ; 1                           ;
 ;     normal            ; 1                           ;
 ;         0 data inputs ; 1                           ;
-; boundary_port         ; 1                           ;
+; boundary_port         ; 24                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 0.00                        ;
 ; Average LUT depth     ; 0.00                        ;
@@ -282,15 +306,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Wed Oct 31 15:27:10 2018
+    Info: Processing started: Thu Nov 01 00:15:28 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Coder_Interleaver -c Coder_Interleaver
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Warning (12019): Can't analyze file -- file mux6144.v is missing
+Info (12021): Found 1 design units, including 1 entities, in source file mux6144.v
+    Info (12023): Found entity 1: mux6144 File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file ind_gen.v
     Info (12023): Found entity 1: ind_gen File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/ind_gen.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file top_level.v
-    Info (12023): Found entity 1: top_level_interleaver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 1
+    Info (12023): Found entity 1: top_level File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file turbo_tb.v
     Info (12023): Found entity 1: turbo_tb File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/turbo_tb.v Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file input_shifter.v
@@ -301,19 +326,61 @@ Info (12021): Found 1 design units, including 1 entities, in source file coder_i
     Info (12023): Found entity 1: coder_interleaver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/coder_interleaver.v Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file shiftreg_6144.v
     Info (12023): Found entity 1: shiftreg_6144 File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/shiftreg_6144.v Line: 2
-Info (12127): Elaborating entity "dummy_top" for the top level hierarchy
-Info (12128): Elaborating entity "coder_interleaver" for hierarchy "coder_interleaver:dummy_inst" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v Line: 17
+Warning (10236): Verilog HDL Implicit Net warning at mux6144.v(12297): created implicit net for "r12_2" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/mux6144.v Line: 12297
+Info (12127): Elaborating entity "top_level" for the top level hierarchy
+Warning (10034): Output port "LEDR0" at top_level.v(7) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 7
+Warning (10034): Output port "LEDR1" at top_level.v(8) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 8
+Warning (10034): Output port "LEDR2" at top_level.v(9) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 9
+Warning (10034): Output port "LEDR3" at top_level.v(10) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 10
+Warning (10034): Output port "LEDR4" at top_level.v(11) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 11
+Warning (10034): Output port "LEDR5" at top_level.v(12) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 12
+Warning (10034): Output port "LEDR6" at top_level.v(13) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 13
+Warning (10034): Output port "LEDR7" at top_level.v(14) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 14
+Warning (10034): Output port "LEDR8" at top_level.v(15) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 15
+Warning (10034): Output port "LEDR9" at top_level.v(16) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 16
+Info (12128): Elaborating entity "shiftreg_6144" for hierarchy "shiftreg_6144:input_shiftreg_inst1" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 32
+Warning (10034): Output port "q" at shiftreg_6144.v(11) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/shiftreg_6144.v Line: 11
+Warning (10034): Output port "shiftout" at shiftreg_6144.v(12) has no driver File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/shiftreg_6144.v Line: 12
+Info (12128): Elaborating entity "coder_interleaver" for hierarchy "coder_interleaver:ci_inst" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 43
+Info (12128): Elaborating entity "ind_gen" for hierarchy "ind_gen:counter" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 48
+Warning (10230): Verilog HDL assignment warning at ind_gen.v(32): truncated value with size 32 to match size of target (14) File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/ind_gen.v Line: 32
+Info (12128): Elaborating entity "mux6144" for hierarchy "mux6144:ci_mux" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 56
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "dum_out" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/dummy_top.v Line: 2
+    Warning (13410): Pin "LEDR0" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 7
+    Warning (13410): Pin "LEDR1" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 8
+    Warning (13410): Pin "LEDR2" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 9
+    Warning (13410): Pin "LEDR3" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 10
+    Warning (13410): Pin "LEDR4" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 11
+    Warning (13410): Pin "LEDR5" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 12
+    Warning (13410): Pin "LEDR6" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 13
+    Warning (13410): Pin "LEDR7" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 14
+    Warning (13410): Pin "LEDR8" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 15
+    Warning (13410): Pin "LEDR9" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 16
+    Warning (13410): Pin "outi" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 17
+    Warning (13410): Pin "outpii" is stuck at GND File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 19
+Info (17049): 14 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 0 input pins
-    Info (21059): Implemented 1 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4840 megabytes
-    Info: Processing ended: Wed Oct 31 15:27:27 2018
-    Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:32
+Warning (21074): Design contains 12 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "k_size_6144" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 2
+    Warning (15610): No output dependent on input pin "databit_in1[0]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[1]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[2]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[3]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[4]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[5]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[6]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "databit_in1[7]" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 3
+    Warning (15610): No output dependent on input pin "CLOCK_50" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 4
+    Warning (15610): No output dependent on input pin "ready_in" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 5
+    Warning (15610): No output dependent on input pin "KEY_0" File: C:/Users/0yaoy/Documents/GitHub/ECE559_Coder_Interleaver/top_level.v Line: 6
+Info (21057): Implemented 24 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 12 input pins
+    Info (21059): Implemented 12 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 41 warnings
+    Info: Peak virtual memory: 4871 megabytes
+    Info: Processing ended: Thu Nov 01 00:15:46 2018
+    Info: Elapsed time: 00:00:18
+    Info: Total CPU time (on all processors): 00:00:34
 
 
