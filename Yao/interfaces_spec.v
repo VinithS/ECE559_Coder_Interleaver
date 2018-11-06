@@ -2,7 +2,7 @@
 //early model with shift register inside our module
 //the interleaver will only process one block at a time since there's only one set of turbo coders
 
-module interleaver_top_level(
+module interleaver_top_level_early(
 	input k_size_6144,      // 0 if 1056, 1 if 6144 block size
 	input [7:0] databyte_in,  // byte-wise serial input
 	input clock,         // clock 
@@ -18,7 +18,7 @@ module interleaver_top_level(
 
 //Here are the final module interfaces
 
-module interleaver_top_level(
+module interleaver_top_level_final(
 	input k_size_6144,      // 0 if 1056, 1 if 6144 block size
 	input [6143:0] datablock,  // the whole data block
 	input clock,         // clock 
