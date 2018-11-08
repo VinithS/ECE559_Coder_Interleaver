@@ -19,7 +19,7 @@ module ind_gen(
 	// negedge ready or 
 	always @ (posedge reset or posedge clock)
 	begin
-		if(reset) begin
+		if(reset) begin//===1'b1||ready===1'b0)
 			cnt <= 13'd0;
 		end
 
