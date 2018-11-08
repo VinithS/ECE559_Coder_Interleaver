@@ -11,9 +11,7 @@ module top_level(
 	output LEDR4, 
 	output LEDR5, 
 	output LEDR6, 
-	output LEDR7, 
-	output LEDR8, 
-	output LEDR9, 
+	output LEDR7,
 	output outi, // bitserial output using the same sequence as input
 	output outpii // bitserial output after remapping
 	);
@@ -23,7 +21,45 @@ module top_level(
 
 	wire clear;
 	assign clear = ~KEY_0;
-
+	
+	reg [9:0] mem_counter;
+	reg led_latch;
+	
+	
+	
+	initial begin
+		mem_counter <= 10'b0;
+		led_latch <= 1'b0;
+		led_val_latch <= 8'b0;
+	end
+	// counter
+	always @(posedge clk or posedge clear) begin
+		if (clear) begin
+			mem_counter <= 10'b0 ;
+			led_latch <= 1'b0;
+		end
+		else if (mem_counter > 10'd767) begin
+			mem_counter <= 10'b0;
+			led_latch <= 1'b1;
+		end
+		else begin
+			mem_counter <= mem_counter + 1'd1;
+			led_latch <= 1'b0;
+		end
+		
+	end
+	
+	/********************************************
+						MEMORY
+    ********************************************/
+	 dat_mem shifting_data(
+			.address    (mem_counter),            // address of data
+			.clock      (~clk),             // you may need to invert the clock
+			.q          (memory_dat)      // shift data
+		);
+	
+	wire [7:0] memory_dat;
+	
 	// shift register taking in byte-wise input
 	wire [6143:0] shift_reg_out,shift_reg_out1;
 	assign shift_reg_out = shift_reg_out1;
@@ -31,7 +67,8 @@ module top_level(
 	//**********to do in the future, have 2 shiftreg to 
 	shiftreg_6144 input_shiftreg_inst1(.aclr(clear),
 												  .clk(clk),
-												  .shiftin(databit_in1),
+//												  .shiftin(databit_in1),
+												  .shiftin(memory_dat),
 												  .q_6144(shift_reg_out1),
 											     .shiftout()
 												  );
@@ -74,18 +111,31 @@ module top_level(
 						  .ind(mux_ind),
 						  .r(outpii)
 						  );
-						  
-	assign LEDR0 = remap_out[0];
-	assign LEDR1 = remap_out[1];
-	assign LEDR2 = remap_out[2];
-	assign LEDR3 = remap_out[3];
-	assign LEDR4 = remap_out[4];
-	assign LEDR5 = remap_out[5];
-	assign LEDR6 = remap_out[6];
-	assign LEDR7 = remap_out[7];
-	assign LEDR8 = remap_out[8];
-	assign LEDR9 = remap_out[9];
-	assign LEDR10 = remap_out[10];
+	
+	reg [7:0] led_val_latch;
+	
+	always@(posedge led_latch or posedge clear) begin
+		if (clear) begin
+			led_val_latch = 8'b0;
+		end
+		led_val_latch[0] = remap_out[0];
+		led_val_latch[1] = remap_out[1];
+		led_val_latch[2] = remap_out[2];
+		led_val_latch[3] = remap_out[3];
+		led_val_latch[4] = remap_out[4];
+		led_val_latch[5] = remap_out[5];
+		led_val_latch[6] = remap_out[6];
+		led_val_latch[7] = remap_out[7];
+	end
+	
+	assign LEDR0 = led_val_latch[0];
+	assign LEDR1 = led_val_latch[1];
+	assign LEDR2 = led_val_latch[2];
+	assign LEDR3 = led_val_latch[3];
+	assign LEDR4 = led_val_latch[4];
+	assign LEDR5 = led_val_latch[5];
+	assign LEDR6 = led_val_latch[6];
+	assign LEDR7 = led_val_latch[7];
 
 	
 	// // data wires
