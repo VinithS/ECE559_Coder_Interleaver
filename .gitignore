@@ -17,3 +17,9 @@ greybox_tmp
 !*.vwf
 !*.csv
 !*.sof
+!*.qsf
+!*.pin
+!*.cdf
+!*.mif
+!*.py
+!*.pdf
