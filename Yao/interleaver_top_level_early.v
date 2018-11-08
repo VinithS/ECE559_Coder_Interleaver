@@ -6,6 +6,7 @@ module interleaver_top_level_early(
 	input [7:0] databyte_in,  // byte-wise serial input
 	input clock,         // clock 
 	input rst,			// reset
+	input shift_en,
 	input ready_in,       // asserted to indicate the whole block is filled and this module starts output serial stream; as of now it needs to be asserted for at least K cycles
 	output outi, // bitserial output using the same sequence as input, i.e. ci
 	output outpii // bitserial output after remapping, i.e. cpii
