@@ -38,9 +38,9 @@ module top_level(
 	hex_to_seven hexout1(test_case_one[6139:6136], hex0);
 	hex_to_seven hexout0(test_case_one[6143:6140], hex1);
 	
-	hex_to_seven counter1(mem_counter[3:0], counter03);
-	hex_to_seven counter2(mem_counter[7:4], counter47);
-	hex_to_seven counter3({2'b0, mem_counter[9:8]}, counter810);
+	hex_to_seven counter1(counter_val_latch[3:0], counter03);
+	hex_to_seven counter2(counter_val_latch[7:4], counter47);
+	hex_to_seven counter3({2'b0, counter_val_latch[9:8]}, counter810);
 	
 	// counter
 	always @(posedge clk or posedge clear) begin
@@ -57,22 +57,23 @@ module top_level(
 	end
 		
 	reg [7:0] led_val_latch;
-
-	always@(*) begin
-		if (k_size_6144) begin
-			led_latch <= 1'b1;
-		end
-		else begin
-			led_latch <= 1'b0;
-		end
-		
-		if (led_latch) begin
-			led_val_latch <= remap_out[7:0];
-		end
-		else begin
-			led_val_latch <= 8'b0;
-		end
+	reg [9:0] counter_val_latch;
+	reg ctr_latch;
+	
+	
+	always@(posedge k_size_6144) begin
+		led_val_latch <= remap_out[7:0];
+		counter_val_latch <= mem_counter;
 	end
+			
+	assign LEDR0 = led_val_latch[0];
+	assign LEDR1 = led_val_latch[1];
+	assign LEDR2 = led_val_latch[2];
+	assign LEDR3 = led_val_latch[3];
+	assign LEDR4 = led_val_latch[4];
+	assign LEDR5 = led_val_latch[5];
+	assign LEDR6 = led_val_latch[6];
+	assign LEDR7 = led_val_latch[7];
 	
 	
 	/********************************************
@@ -109,7 +110,7 @@ module top_level(
 	//*********passive module, unless a bug is spotted, it's done**************
 	wire [6143:0] remap_in, remap_out;
 	assign remap_in = shift_reg_out;
-	coder_interleaver ci_inst(.cin(remap_in),
+	coder_interleaver ci_inst(.cin(test_case_one),
 //									  .K_eq_6144(k_size_6144),
 									  .K_eq_6144(test_case_one_k_size),
 									  .cout(remap_out)
@@ -139,15 +140,6 @@ module top_level(
 						  .ind(mux_ind),
 						  .r(outpii)
 						  );
-		
-	assign LEDR0 = led_val_latch[0];
-	assign LEDR1 = led_val_latch[1];
-	assign LEDR2 = led_val_latch[2];
-	assign LEDR3 = led_val_latch[3];
-	assign LEDR4 = led_val_latch[4];
-	assign LEDR5 = led_val_latch[5];
-	assign LEDR6 = led_val_latch[6];
-	assign LEDR7 = led_val_latch[7];
 
 	
 	// // data wires
