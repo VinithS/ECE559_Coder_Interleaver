@@ -1,0 +1,30 @@
+20181110
+list of changes to make:
+
+notes:
+shiftreg_buf.v is replacing shiftreg_6144.v
+reg6144.v is added (to be added to the project)
+
+(done?)
+top level:
+add routings to the reg6144
+directionality of endianess
+
+(done)
+shiftreg:
+directionality (done, need right most bit is lsb or earliest bit for shiftin)
+add one more byte space (done)
+add shift_en (done)
+
+(done)
+reg6144:
+just add this module (done)
+
+(done, compiled, yet untested)
+remap/coder_interleaver:
+change wiring (done)
+
+(done)
+ind_gen:
+index change to k-1 to 0 (not needed any more)
+take care of ready signal  (added fsm to take care of this)
