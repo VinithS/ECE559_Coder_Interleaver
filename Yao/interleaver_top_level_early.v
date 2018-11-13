@@ -10,7 +10,6 @@ module interleaver_top_level_early(
 	input ready_in,       // asserted to indicate the whole block is filled and this module starts output serial stream; as of now it needs to be asserted for at least K cycles
 	output outi, // bitserial output using the same sequence as input, i.e. ci
 	output outpii // bitserial output after remapping, i.e. cpii
-	//output process_complete
 	);
 
 	wire clk;
@@ -20,35 +19,25 @@ module interleaver_top_level_early(
 	assign clear=rst;
 
 	// shift register taking in byte-wise input
-	//there is room for an extra byte if ready/datavalid is asserted one cycle after datavalid full block is full
-	wire [6151:0] shift_reg_out;//,shift_reg_out1;
+	wire [6143:0] shift_reg_out;//,shift_reg_out1;
 	// assign shift_reg_out = shift_reg_out1;
-	shiftreg_buff input_shiftreg_inst1(.aclr(clear),
+	// wire [7:0]
+	//**********to do in the future, have 2 shiftreg to 
+	shiftreg_6144 input_shiftreg_inst1(.aclr(clear),
 										.clk(clk),
 										.shiftin(databyte_in),
-										.shiften(shift_en),
-										.qout(shift_reg_out),
-										);
+										.q_6144(shift_reg_out),
+										.shiftout()
+										 );
 	
-	//secondary buffer
-	wire [6143:0] reg_buf_out,reg_buf_in;
-	assign reg_buf_in=shift_reg_out[6143:0];
-	reg6144(.clk(clk),
-	.rst(clear),
-	.en(ready_in),
-	.D(reg_buf_in),
-	.Q(reg_buf_out));
-
-
 	//remapping module
 	//*********passive module, unless a bug is spotted, it's done**************
 	wire [6143:0] remap_in, remap_out;
-	//!!!!!!!!!!!!!!!!!!!this might need changing depending on the timing related to ready signal
-	assign remap_in = reg_buf_out;
+	assign remap_in = shift_reg_out;
 	coder_interleaver ci_inst(.cin(remap_in),
-								.K_eq_6144(k_size_6144),
-								.cout(remap_out)
-								);
+									  .K_eq_6144(k_size_6144),
+									  .cout(remap_out)
+									  );
 
 	//counter
 	//*******module to be finish and tested***********

@@ -29,6 +29,7 @@ module ind_gen(
 				2'd0: begin: waiting
 					if (ready===1'b1) begin
 						state<=2'd1;
+					end
 					else begin
 						cnt <= 13'd0;
 						//proc_comp<=1'b0;
@@ -58,6 +59,7 @@ module ind_gen(
 				end
 			endcase
 		end
+	end
 
 
 endmodule
