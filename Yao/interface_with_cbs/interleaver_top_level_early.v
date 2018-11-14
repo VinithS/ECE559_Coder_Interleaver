@@ -23,11 +23,11 @@ module interleaver_top_level_early(
 	//there is room for an extra byte if ready/datavalid is asserted one cycle after datavalid full block is full
 	wire [6151:0] shift_reg_out;//,shift_reg_out1;
 	// assign shift_reg_out = shift_reg_out1;
-	shiftreg_buff input_shiftreg_inst1(.aclr(clear),
+	shiftreg_buf input_shiftreg_inst1(.aclr(clear),
 										.clk(clk),
 										.shiftin(databyte_in),
 										.shiften(shift_en),
-										.qout(shift_reg_out),
+										.q_out(shift_reg_out),
 										);
 	
 	//secondary buffer
