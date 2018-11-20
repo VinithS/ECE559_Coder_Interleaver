@@ -4,7 +4,8 @@
 module coder_interleaver (
 	input [6143:0] cin,    // Clock
 	input K_eq_6144,
-	output [6143:0] cout
+	output [6143:0] cout,
+	output [6143:0] ciout
 );
 	
 	//c pi i wires given k
@@ -13,6 +14,11 @@ module coder_interleaver (
 	//ci wires
 	wire [6143:0] ci_6144;
 	wire [1055:0] ci_1056;
+
+	assign ci_6144 = cin;
+
+	assign ciout = K_eq_6144?ci_6144:{5088'b0,ci_1056};
+
 	//assigned in loops
 
 	parameter f1_6144=263;
@@ -58,8 +64,8 @@ module coder_interleaver (
 			//no particular reason added here
 			// to achieve: assign ci_6144 = cin[0:6143];
 			//				&assign ci_1056 = cin[5088:6143];
-			assign ci_6144[i1] = cin[6143-i1];
-			assign ci_1056[i1] = cin[6143-i1];
+			//assign ci_6144[i1] = cin[6143-i1];
+			assign ci_1056[i1] = cin[5088+i1];
 		end
 	endgenerate
 
@@ -74,7 +80,7 @@ module coder_interleaver (
 
 			//no particular reason added here
 			// to achieve: assign ci_6144 = cin[0:6143];
-			assign ci_6144[i2] = cin[6143-i2];
+			//assign ci_6144[i2] = cin[6143-i2];
 		end
 	endgenerate
 
@@ -87,7 +93,7 @@ module coder_interleaver (
 
 			//no particular reason added here
 			// to achieve: assign ci_6144 = cin[0:6143];
-			assign ci_6144[i3] = cin[6143-i3];
+			//assign ci_6144[i3] = cin[6143-i3];
 		end
 	endgenerate
 
