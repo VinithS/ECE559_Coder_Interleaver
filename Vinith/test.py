@@ -34,8 +34,8 @@ if __name__ == '__main__':
     # input_val = create_val('0')
     is_6144 = 1
     # input_val = input_val if is_6144 == 1 else input_val[-1056:]
-    input_val = ['1', '1', '0', '1', '1', '0'] * 1024
-    input_val[8:31] = '000000000000000100000010'
+    input_val = ['1', '1', '0', '1', '1', '1','1','1'] * 768
+    # input_val[8:31] = '000000000000000100000010'
     input_val = ''.join(input_val)
     print 'input value', 'of size', len(input_val)
     print input_val
