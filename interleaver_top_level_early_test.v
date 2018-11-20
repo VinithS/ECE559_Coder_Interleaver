@@ -8,6 +8,8 @@ module interleaver_top_level_early_test(
 	input rst,			// reset
 	input shift_en,
 	input ready_in,       // asserted to indicate the whole block is filled and this module starts output serial stream; as of now it needs to be asserted for at least K cycles
+	output ready_out, //asserted to tell turbo coder to start
+	output k_size_out, //tell the turbo coder sizes of the current block, 0 if 1056, 1 if 6144 block size
 	output outi, // bitserial output using the same sequence as input, i.e. ci
 	output outpii // bitserial output after remapping, i.e. cpii
 	//output process_complete
@@ -18,6 +20,9 @@ module interleaver_top_level_early_test(
 
 	wire clear;
 	assign clear=rst;
+
+	//need to double check timing
+	assign ready_out = ready_in;
 
 	// shift register taking in byte-wise input
 	//there is room for an extra byte if ready/datavalid is asserted one cycle after datavalid full block is full
@@ -55,13 +60,18 @@ module interleaver_top_level_early_test(
 	//counter
 	//*******module to be finish and tested***********
 	wire [13:0] mux_ind;
+	wire k_out;
+	assign k_size_out = k_out;
 	ind_gen counter(.clock(clk),
 					.k(k_size_6144),
 					.ready(ready_in),
 					.reset(clear),
-					.out(mux_ind)
+					.out(mux_ind),
+					.k_out(k_out)
 					);
 
+	wire [1:0] cnt_state;
+	assign cnt_state = counter.state;
 	//mux
 	//*******module to be finish and tested***********
 	wire [6143:0] cpii_array;

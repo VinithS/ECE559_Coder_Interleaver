@@ -9,7 +9,7 @@ module coder_interleaver_tb();
 	
 	reg [7:0] byte_in;
 //11011111
-	wire outi, outpii;
+	wire outi, outpii, k_size_out, ready_out;
 	//monitor output i
 
 	interleaver_top_level_early_test inter_inst(
@@ -19,6 +19,8 @@ module coder_interleaver_tb();
 	.rst(rst),			// reset
 	.shift_en(shift_en),
 	.ready_in(ready_in),       // asserted to indicate the whole block is filled and this module starts output serial stream; as of now it needs to be asserted for at least K cycles
+	.ready_out(ready_out), 
+	.k_size_out(k_size_out),
 	.outi(outi), // bitserial output using the same sequence as input, i.e. ci
 	.outpii(outpii) // bitserial output after remapping, i.e. cpii
 	//output process_complete
@@ -36,6 +38,9 @@ module coder_interleaver_tb();
 
 	wire [13:0] mux_ind;
 	assign mux_ind = inter_inst.mux_ind;
+
+	wire [1:0] p_cnt_state;
+	assign p_cnt_state = inter_inst.cnt_state;
 integer i = 0;
 	initial begin
 		clk=0;
@@ -72,8 +77,10 @@ integer i = 0;
 		$stop;
 		for (i = 0; i < 6144; i=i+1) begin
 			@(negedge clk) $display("ready_in cycle: %d",i);
-			$display("Time:%d, mux index:%d, \t Outi %b,\tOutPii: %b",$time,mux_ind, outi,outpii);
+			$display("Time:%d, cnt_state:%d, mux index:%d, \t Outi %b,\tOutPii: %b",$time,p_cnt_state, mux_ind, outi,outpii);
 		end
+		@(negedge clk) $display("Time:%d, cnt_state:%d, mux index:%d, \t Outi %b,\tOutPii: %b",$time,p_cnt_state, mux_ind, outi,outpii);
+
 		//shifting now
 		//interested in mux_ind
 		#1000; // wait 50 ns
