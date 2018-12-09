@@ -12,7 +12,7 @@ module coder_interleaver_tb();
 	wire outi, outpii, k_size_out, ready_out;
 	//monitor output i
 
-	interleaver_top_level_early_test inter_inst(
+	interleaver_top_level_early inter_inst(
 	.k_size_6144(size_6144),      // 0 if 1056, 1 if 6144 block size
 	.databyte_in(byte_in),  // byte-wise serial input
 	.clock(clk),         // clock 
