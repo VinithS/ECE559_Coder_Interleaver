@@ -28,3 +28,7 @@ greybox_tmp
 !*.log
 !*.aux
 !*.gz
+
+# accept image files
+!*.png
+!*.jpg
