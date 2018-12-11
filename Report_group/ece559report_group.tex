@@ -19,14 +19,37 @@
 
 
 \newpage 
-\section{A high-level description of the function}
-I wonder if vinith can do this
-1.  A high-level description of the function for which the team was
-    
-        responsible, including:
-         o  how this function relates to the overall function of the
-            encoder stack
-         o  how this set of functions relates to the relevant 3GPP standards
+\section{3GPP LTE Advanced Wireless System}
+    \subsection{Introduction}
+        The next advancement on wireless communication was proposed by the 3rd Generation Partnership Program (3GPP). Formally a candidate 4G to ITU-T in 2009, it was standardized in March of 2011.
+        The biggest benefit of LTE Advanced is the ability to take advantage of avdanced topology networks. The usage of optimized heterogeneous networks and utilizing macrocells with low power nodes such as pico and femto cells create a much better network compared to macrocells (wide area high power base stations that covers a large radius). LTE Advanced also introduces multicarrier so we can utilize wider bandwidth, up to 100 MHz, which will support high data rates.
+        
+        Our focus this semester lied on the coding, multiplexing and mapping to physical channels for E-UTRA section of the LTE Advanced specification as seen in 3GPP TS 36.212 V10.5.0. The sub-systems extracted from this document that our class worked on is as follows:
+        \begin{itemize}
+            \item Code block segmentation and CRC
+            \item Convolutional encoder
+            \item Turbo-code constituent encoder
+            \item Turbo-code interleaver
+            \item Sub-block interleaver and multiplexer 
+        \end{itemize}
+    \subsection{Internal Interleaver}
+        Our group was responsible for the turbo coder internal interleaver. The purpose of this sub-system is to block interleave the data, frame quality indicator (CRC), and the reserve bits input to the turbo encoder. This interleaving happens through a index generator function defined in section 5.1.3.2.3 of the document. First we define an index generator function that selects the certain index of output bits from a certain input bit index. We will call this $\Pi(i)$:
+        $$\Pi(i) = (f_1\cdot i + f_2\cdot i^2 )\mod K$$
+        where $f_1$, $f_2$ are defined in Table 5.1.3-3 in the 3GPP document. These values depend on the block size $K$. In our case, $K$ could only be two different sizes 1056 and 6144. This leads us to the following values for $f_1$ and $f_2$:
+        \renewcommand\arraystretch{1.2}
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+            \hline
+                $K$ & $f_1$ & $f_2$  \\ \hline
+                1056 & 17 & 66 \\ \hline 
+                6144 & 263 & 480 \\ \hline
+            \end{tabular}
+        \end{center}
+        Using these values, we can generate the output bits using the following function:
+        $$c'_i = c_{\Pi(i)} \quad\forall i \in \{0, 1, 2, ..., K\}$$
+        where $c_i$ is the $i^{th}$ bit of the input sequence and $c'_i$ is the $i^{th}$ bit of the output sequence defined by the function $\Pi(i)$.
+        
+        This sub-module is part of the larger sub-system, turbo-code constituent encoder. The turbo encoder's purpose is to encode the incoming data, CRC, and the two reserved bits. During encoding, the output tail sequence is also added. The encoder generates the output based on the code rate. In our case, the code rate was 1/3. It uses two systematic, recursive, convolutional encoders connected in parallel with an interleaver for the second encoder. The two recursive convolutional codes are called the constituents codes of the turbo code. Since there is delay after the interleaver processes the data, the second encoder must account for this delay of the incoming data sequence.
 \section{Description of the design}
     2.  Description of the design, including:
         (mostly yao)
@@ -74,11 +97,6 @@ I wonder if vinith can do this
          o  what were the test conditions, what is the significance of the test
             in the context of the subsystem function
          o  relationship to simulation test results
-
-
-
-
-
 
 \section{A1}
 The circuit in Figure 6.8 was and simulated to find A1. Here're the simulation result:
