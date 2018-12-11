@@ -1,36 +1,41 @@
-\documentclass[letterpaper]{article} % Feel free to change this
+\documentclass[letterpaper, 12pt]{article} % Feel free to change this
 \usepackage{graphicx}
-\usepackage{caption}
-\usepackage{rotating}
 \usepackage{amsmath}
-% comment out the next two lines if it doesn't compile for you
-% or you could just install this package as well
-\usepackage{vmargin}   
-\setmarginsrb{1.0in}{1.0in}{1.0in}{1.0in}{12pt}{10mm}{12pt}{0mm} 
+\usepackage{caption}
+\usepackage[margin=1in]{geometry}
+
 \begin{document}
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.2\textwidth]{Images/Duke_logo.png}\par\vspace{1cm}
+	{\scshape\LARGE Duke University \par}
+	\vspace{1cm}
+	{\scshape\Large ECE 559: Advanced Digital Systems \par}
+	\vspace{1.5cm}
+	{\huge\bfseries Turbo Coder Internal Interleaver \par}
+	\vspace{2cm}
+   {By submitting this \LaTeX{} document, I affirm that it complies with the Duke Community Standard and the guidelines set forth for this assignment.\par}
+   \vspace{1cm}
+	{\Large Vinith Sharma, Yao Yuang, Cheng Lyu}
+	\vfill
+% Bottom of the page
+	{\large Fall 2019\par}
+\end{titlepage}
 
-\title{ECE559 Fall2018, Constituent Coder Interleaver Group\\
-\begin{large}Group Design Report\end{large}}
-\author{xxx}
-% \today\\
-\date{\today}%Nov. 26, 2018} % Change this to the date you are submitting
-\maketitle
-\vspace{12.0cm}
 
-
-\newpage 
+\newpage
 \section{3GPP LTE Advanced Wireless System}
     \subsection{Introduction}
         The next advancement on wireless communication was proposed by the 3rd Generation Partnership Program (3GPP). Formally a candidate 4G to ITU-T in 2009, it was standardized in March of 2011.
         The biggest benefit of LTE Advanced is the ability to take advantage of avdanced topology networks. The usage of optimized heterogeneous networks and utilizing macrocells with low power nodes such as pico and femto cells create a much better network compared to macrocells (wide area high power base stations that covers a large radius). LTE Advanced also introduces multicarrier so we can utilize wider bandwidth, up to 100 MHz, which will support high data rates.
-        
+
         Our focus this semester lied on the coding, multiplexing and mapping to physical channels for E-UTRA section of the LTE Advanced specification as seen in 3GPP TS 36.212 V10.5.0. The sub-systems extracted from this document that our class worked on is as follows:
         \begin{itemize}
             \item Code block segmentation and CRC
             \item Convolutional encoder
             \item Turbo-code constituent encoder
             \item Turbo-code interleaver
-            \item Sub-block interleaver and multiplexer 
+            \item Sub-block interleaver and multiplexer
         \end{itemize}
     \subsection{Internal Interleaver}
         Our group was responsible for the turbo coder internal interleaver. The purpose of this sub-system is to block interleave the data, frame quality indicator (CRC), and the reserve bits input to the turbo encoder. This interleaving happens through a index generator function defined in section 5.1.3.2.3 of the document. First we define an index generator function that selects the certain index of output bits from a certain input bit index. We will call this $\Pi(i)$:
@@ -41,14 +46,14 @@
             \begin{tabular}{|c|c|c|}
             \hline
                 $K$ & $f_1$ & $f_2$  \\ \hline
-                1056 & 17 & 66 \\ \hline 
+                1056 & 17 & 66 \\ \hline
                 6144 & 263 & 480 \\ \hline
             \end{tabular}
         \end{center}
         Using these values, we can generate the output bits using the following function:
         $$c'_i = c_{\Pi(i)} \quad\forall i \in \{0, 1, 2, ..., K\}$$
         where $c_i$ is the $i^{th}$ bit of the input sequence and $c'_i$ is the $i^{th}$ bit of the output sequence defined by the function $\Pi(i)$.
-        
+
         This sub-module is part of the larger sub-system, turbo-code constituent encoder. The turbo encoder's purpose is to encode the incoming data, CRC, and the two reserved bits. During encoding, the output tail sequence is also added. The encoder generates the output based on the code rate. In our case, the code rate was 1/3. It uses two systematic, recursive, convolutional encoders connected in parallel with an interleaver for the second encoder. The two recursive convolutional codes are called the constituents codes of the turbo code. Since there is delay after the interleaver processes the data, the second encoder must account for this delay of the incoming data sequence.
 \section{Description of the design}
     2.  Description of the design, including:
@@ -57,7 +62,7 @@
         (mostly yao)
          o  identification of the data path through the function and
 		    how the data path is controlled by FSMs, shown using a
-			block diagram of the design as implemented. 
+			block diagram of the design as implemented.
          o  for data path and associated combinational logic (not FSMs), include
             the RTL view from Quartus, with a brief prose description;  this can
             be used to describe the block diagram mentioned in the
@@ -87,8 +92,7 @@
             and in a prose discription, what the simulation results indicate with
             respect to operation and performance of the subsystem
 
-\section{Hardware test results}
-(mostly vinith)
+\section{Hardware Testing}
     5.  Hardware test results
          o  what was run on the hardware, was it run at speed or "statically"?
          o  show appropriate indication of the test results (e.g. prints of
