@@ -19,10 +19,10 @@
 	\vspace{2cm}
    {By submitting this \LaTeX{} document, I affirm that it complies with the Duke Community Standard and the guidelines set forth for this assignment.\par}
    \vspace{1cm}
-	{\Large Vinith Sharma, Yao Yuang, Cheng Lyu}
+	{\Large Vinith Sharma, Yao Yuan, Cheng Lyu}
 	\vfill
 % Bottom of the page
-	{\large Fall 2019\par}
+	{\large Fall 2018\par}
 \end{titlepage}
 
 \newpage 
@@ -76,52 +76,45 @@
   %           represents, how inputs determine the next state and Moore and Mealy
   %           outputs for each state, and also an indication of how the FSM is
   %           related to data flow through the function
-The design overview is shown in the following block diagram, which includes functional blocks, interfaces (with more description later), and datapath:\\
+The design overview is shown in the following block diagram, which includes functional blocks, interfaces (with more description later), and the data path:
 
 %block diagram/rtl viewer
-\begin{minipage}{1.0\textwidth}
-\includegraphics[width=15cm, angle=0]{files/rtl_all.png}
-\centering
-\captionof{figure}{Block diagram of functional blocks}
-\centering
-\end{minipage}
-\bigskip
+\begin{center}
+    \includegraphics[width=15cm, angle=0]{files/rtl_all}
+    \captionof{figure}{Block diagram of functional blocks}
+\end{center}
 
 % -interfaces enumeration \& description
-Here are the enumeration \& description of interfaces to other functions in the encoder stack:\\
-
+Here are the enumeration \& description of interfaces to other functions in the encoder stack:
 \begin{itemize}
-    \item {\it input} {\bf clock}: The clock.
-    \item {\it input} {\bf rst}: The reset input.
-    \item {\it input} {\bf k\_size\_6144}: The indication of the block size being transferred into our module from the code block segmentation module. This bit should be asserted 0 if block size is 1056, and asserted 1 if block size is 6144 when the ready\_in signal was asserted.
-    \item {\it input} {\bf [7:0] databyte\_in}: The input data byte of the data block from the code block segmentation module. This data is shifted into the "shift register". The right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index.
-    \item {\it input} {\bf shift\_en}: This input control signal comes from code block segmentation module. At the clock rise, assertion of this makes the input byte shifted into the input shift register buffer.
-    \item {\it input} {\bf ready\_in}: This input control signal comes from code block segmentation module. It indicates the finish of transfering of the data block. Once this signal is asserted, the output FSM starts operating and outputting to the turbo constituent coder module.
-    \item {\it output} {\bf k\_size\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the size of the data block being output right now.
-    \item {\it output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle. 
-    \item {\it output} {\bf outi}: This output signal goes to the turbo constituent coder module. It's the c$_i$ output in the 3GPP document. It's also the output data block in original sequence.
-    \item {\it output} {\bf outpii}: This output signal goes to the turbo constituent coder module. It's the c$_{\pi i}$ output in the document. It's also the output data block in a remapped sequence indicated by the 3GPP document.
+    \item {\texttt input} {\bf clock}: The clock.
+    \item {\texttt input} {\bf rst}: The reset input.
+    \item {\texttt input} {\bf k\_size\_6144}: The indication of the block size being transferred into our module from the code block segmentation module. This bit should be asserted 0 if block size is 1056, and asserted 1 if block size is 6144 when the ready\_in signal was asserted.
+    \item {\texttt input} {\bf [7:0] databyte\_in}: The input data byte of the data block from the code block segmentation module. This data is shifted into the "shift register". The right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index.
+    \item {\texttt input} {\bf shift\_en}: This input control signal comes from code block segmentation module. At the clock rise, assertion of this makes the input byte shifted into the input shift register buffer.
+    \item {\texttt input} {\bf ready\_in}: This input control signal comes from code block segmentation module. It indicates the finish of transferring of the data block. Once this signal is asserted, the output FSM starts operating and outputting to the turbo constituent coder module.
+    \item {\texttt output} {\bf k\_size\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the size of the data block being output right now.
+    \item {\texttt output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle. 
+    \item {\texttt output} {\bf outi}: This output signal goes to the turbo constituent coder module. It's the c$_i$ output in the 3GPP document. It's also the output data block in original sequence.
+    \item {\texttt output} {\bf outpii}: This output signal goes to the turbo constituent coder module. It's the c$_{\pi i}$ output in the document. It's also the output data block in a remapped sequence indicated by the 3GPP document.
 \end{itemize}
 
-In terms of the datapath inside our module, there's not much combination logics but a bunch of wiring between functional blocks or even inside certain block. 
+In terms of the datapath inside our module, there's not much combination logic but a bunch of wiring between functional blocks or even inside certain block. 
 
 \begin{enumerate}
-    \item The data is firstly shifted into the "shiftreg" buffer most of the time one byte per 8 cycle from the code block segmentation module. In terms of the endianess, the right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index. The code block segmentation module owns the control signal of "{\bf shift\_en}" to adjust timing to their output.
+    \item The data is firstly shifted into the "shiftreg" buffer most of the time one byte per 8 cycle from the code block segmentation module. In terms of the endianness, the right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index. The code block segmentation module owns the control signal of "{\bf shift\_en}" to adjust timing to their output.
     \item Once the whole data block is in, the "ready\_in" signal is asserted. Then the data block in the "shiftreg" gets latched/held into the secondary "register" buffer, after which the "shiftreg" buffer can start taking next data block from the code block segmentation module while the current data block can be processed and output to the "turbo constituent coder". Simultaneously, the block size "{\bf k\_size\_in}" of the current data block gets latched into the FSM and outputs as "{\bf k\_size\_out}" such that the "turbo constituent coder" knows the size of the code block they are processing.
-    \item The output of the secondary "register" buffer, the whole data block, goes through the remapping module to generate the sequence specified by the 3GPP document purely by rewiring the bits. For example, c$_{\pi i}$ is just c$_{i,1056}$ given k=1056 or c$_{i,6144}$ given k=6144, where $_{i,1056}$ and $_{i,6144}$ are indices pre-calculated and hardcoded according to the 3GPP document. There's no combinational logic other than a mux that selects the corresponding bit given k inside the remapping module.
-    \item The original and the remapped data blocks are fed into two muxes seperately and the FSM outputs an ascending sequence to select the corresponding output bits to the "turbo constituent coder" module.
+    \item The output of the secondary "register" buffer, the whole data block, goes through the remapping module to generate the sequence specified by the 3GPP document purely by rewiring the bits. For example, c$_{\pi i}$ is just c$_{i,1056}$ given k=1056 or c$_{i,6144}$ given k=6144, where $_{i,1056}$ and $_{i,6144}$ are indices pre-calculated and hard coded according to the 3GPP document. There's no combinational logic other than a mux that selects the corresponding bit given k inside the remapping module.
+    \item The original and the remapped data blocks are fed into two muxes separately and the FSM outputs an ascending sequence to select the corresponding output bits to the "turbo constituent coder" module.
 \end{enumerate}
 
 Below is the state transition diagram for the counter module, which is a very simple FSM.
 
 %state transition diagram
-\begin{minipage}{1.0\textwidth}
-\includegraphics[width=14cm, angle=0]{files/states.png}
-\centering
-\captionof{figure}{State transition diagram of output FSM}
-\centering
-\end{minipage}
-\bigskip
+\begin{center}
+    \includegraphics[width=14cm, angle=0]{files/states}
+    \captionof{figure}{State transition diagram of output FSM}
+\end{center}
 
 (!!!!!cheng can you talk abt the fsm?)
 -o  FSM designs, with pictorial description (s)
@@ -151,55 +144,68 @@ Below is the state transition diagram for the counter module, which is a very si
 
 Firstly, there's a python script that calculates the output sequence give the input data block. Below is a pair of console outputs generated by the python script:
 
+\begin{figure}[ht]
+\centering
 %ci
-\begin{minipage}{.49\textwidth}
-\includegraphics[width=8cm, angle=0]{files/ci.png}
-\centering
-\captionof{figure}{c$_i$}
-\centering
-\end{minipage}
-%ci
-\begin{minipage}{.49\textwidth}
-\includegraphics[width=7.5cm, angle=0]{files/cpii.png}
-\centering
-\captionof{figure}{c$_{\pi i}$}
-\centering
-\end{minipage}
-\bigskip
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{files/ci}
+  \caption{c$_i$}
+  \label{ci}
+\end{subfigure}%
+%cpii
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{files/cpii}
+  \caption{c$_{\pi (i)}$}
+  \label{cpii}
+\end{subfigure}
+\caption{The input and output values from a testbench simulation}
+\label{fig:tb}
+\end{figure}
 
-On the left is the original data block and on the right is the remapped data block. The orignial data block is just the repeating pattern byte "11111011". Again, the right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index. In the console output, the right-most bit, or LSB, is also the earliest bit in the sequence or bit with smaller index. The left most bit is the last output bit. This script is used to calculate the output sequence.\\
+On the left is the original data block and on the right is the remapped data block. The original data block is just the repeating pattern byte "11111011". Again, the right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index. In the console output, the right-most bit, or LSB, is also the earliest bit in the sequence or bit with smaller index. The left most bit is the last output bit. This script is used to calculate the output sequence.\par
+The functional correctness of the overall module is verified with a testbench mimicking inputs from the code block segmentation module and monitoring the outputs to the turbo constituent coder.\par
 
-The functional correctness of the overall module is verified with a testbench mimicing inputs from the code block segmentation module and monitoring the outputs to the turbo constituent coder.\\ 
-
-In this testbench, the size k is 6144. The {\bf databyte\_in} was asserted as "11111011", which was the input pattern the python script ran on. The ${\bf  shift\_en}$ was asserted for 768 clock cycles to pass in the whole 6144-sized data block. Then the  ${\bf  shift\_en}$ was desserted and the ${\bf  ready\_in}$ was asserted. Here's the console output generated by the testbench monitoring the two output bits:\\
-
-\begin{minipage}{1.0\textwidth}
-\includegraphics[width=14cm, angle=0]{files/modelsim_result.png}
-\centering
+In this testbench, the size k is 6144. The {\bf databyte\_in} was asserted as "11111011", which was the input pattern the python script ran on. The ${\bf  shift\_en}$ was asserted for 768 clock cycles to pass in the whole 6144-sized data block. Then the  ${\bf  shift\_en}$ was de-asserted and the ${\bf  ready\_in}$ was asserted. Here's the console output generated by the testbench monitoring the two output bits:
+\begin{center}
+\includegraphics[width=14cm, angle=0]{files/modelsim_result}
 \captionof{figure}{Console output}
-\centering
-\end{minipage}
-\bigskip
+\end{center}
 
-The mux index, which indicates which bit is being output (starting from 0 instead of 1), and the counter FSM state were also printed, in additional to the two output bits. It can be seen from the terminal output above that the mux index stopped increasing at 6143 and counter FSM state increased to 2, so this is the end of output sequence. Shown in the terminal are the last 6 bits for both outputs. With the LSB being the bit with smallest index, the last 6 bits for output c$_{i}$ and c$_{\pi i}$ are "110111" and "111101" respectively, matching the outputs generated by the python script.\\
-
-This simulated test verified the FSM transition and the functional correctness of the "constitunt coder interleaver", in terms of the output sequences and interfaces with other functional modules in the code stack.\\
+The mux index, which indicates which bit is being output (starting from 0 instead of 1), and the counter FSM state were also printed, in additional to the two output bits. It can be seen from the terminal output above that the mux index stopped increasing at 6143 and counter FSM state increased to 2, so this is the end of output sequence. Shown in the terminal are the last 6 bits for both outputs. With the LSB being the bit with smallest index, the last 6 bits for output c$_{i}$ and c$_{\pi i}$ are "110111" and "111101" respectively, matching the outputs generated by the python script.\par
+This simulated test verified the FSM transition and the functional correctness of the "constituent coder interleaver", in terms of the output sequences and interfaces with other functional modules in the code stack.
 \section{Hardware test results}
-Initial concerns about the simulation was the size of the blocks and the number of bits we have to deal with. Trying to check every bit in a block of size 6144 would take an unnecessary amount of time. Thus, Vinith wrote a python script that simulated this sub-module. Listing \ref{simfunc} is a python function that takes in two parameters \texttt{input\_num}, the input sequence represented as a bitstring, and \texttt{flag\_6144}, a one bit number that represents the size of the block. Writing 6144 bits would also take a tremendous amount of time and any sort of recurring pattern in the input will be present in the output, thus Listing \ref{rng} is another function that generates a random bitstring of size specified inside the \texttt{range()} function in the \texttt{for} loop.\par
-The initial hardware testing was done using a \texttt{reg} with a constant value and passing all the bits in block side $K$ into our interleaving module. The clock did not matter for this because everything was done instantaneously as this test was essentially rewiring the wires based on the input values. We then took the bottom 10 bits of the output sequence and displayed it using the LEDs in the FPGA. After verifying that the output sequence matched, we moved on to the next part in hardware testing: simulating an incoming bit sequence. The test above did not really tell us how it would be used in real life, thus we had to incorporate a mechanism that simulated an incoming n-bit wide sequence. \par
-We skipped the bit-serial implementation and tested a byte-serial implementation. We created a byte-shift register that is 6144 bit wide. Since we did not have the code segmentation unit block, we used a read-only memory to hold the input sequence. Using a counter up to $\frac{6144}{8} = 768$, we took the values out of the ROM and fed it into the shift register. After 768 cycles, we latched the value onto a buffer register and fed it into our interleaving module. The output value was once again latched onto another register and displayed using the LEDs and 7-segment displayed found on the FPGA. This test was done with a 50 Hz clock so we could visibly see the counter incrementing and the values from ROM being shifted into the shift register. The first and last three bytes of \texttt{mif} file that was loaded onto the ROM is as follows:
-\begin{multicols}{2}
-\begin{enumerate}
-\setcounter{enumi}{-1}
-    \item $11110111_2$ $\longrightarrow$ F$7_{16}$
-    \item $00111100_2$ $\longrightarrow$ 3C$_{16}$
-    \item $11000110_2$ $\longrightarrow$ C$6_{16}$
-\setcounter{enumi}{764}
-    \item $11111000_2$ $\longrightarrow$ F$8_{16}$
-    \item $01111110_2$ $\longrightarrow$ 7E$_{16}$
-    \item $00111011_2$ $\longrightarrow$ 3B$_{16}$
-\end{enumerate}
-\end{multicols}
+Initial concerns about the simulation was the size of the blocks and the number of bits we have to deal with. Trying to check every bit in a block of size 6144 would take an unnecessary amount of time. Thus, Vinith wrote a python script that simulated this sub-module. Listing \ref{simfunc} is a python function that takes in two parameters \texttt{input\_num}, the input sequence represented as a bit-string, and \texttt{flag\_6144}, a one bit number that represents the size of the block. Writing 6144 bits would also take a tremendous amount of time and any sort of recurring pattern in the input will be present in the output, thus Listing \ref{rng} is another function that generates a random bit-string of size specified inside the \texttt{range()} function in the \texttt{for} loop.\par
+The initial hardware testing was done using a \texttt{reg} with a constant value and passing all the bits in block side $K$ into our interleaving module. This was the one and only test run statically. The clock did not matter for this because everything was done instantaneously as this test was essentially rewiring the wires based on the input values. We then took the bottom 10 bits of the output sequence and displayed it using the LEDs in the FPGA. After verifying that the output sequence matched, we moved on to the next part in hardware testing: simulating an incoming bit sequence. The test above did not really tell us how it would be used in real life, thus we had to incorporate a mechanism that simulated an incoming n-bit wide sequence. \par
+We skipped the bit-serial implementation and tested a byte-serial implementation. We created a byte-shift register that is 6144 bit wide. Since we did not have the code segmentation unit block, we used a read-only memory to hold the input sequence. Using a counter up to $\frac{6144}{8} = 768$, we took the values out of the ROM and fed it into the shift register. After 768 cycles, we latched the value onto a buffer register and fed it into our interleaving module. The output value was once again latched onto another register and displayed using the LEDs and 7-segment displayed found on the FPGA. This test was done with a 50 Hz clock so we could visibly see as the counter increments and the values from ROM being shifted into the shift register. The first and last three bytes of \texttt{mif} file that was loaded onto the ROM is as follows:
+
+\begin{table}[!htb]
+    \caption{First and last three bytes in the \texttt{mif} file}
+    \begin{subtable}{.5\linewidth}
+      \centering
+        \caption{}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Address & Binary & Hex \\ \hline
+            0 & 11110111 & F7 \\ \hline
+            1 & 00111100 & 3C \\ \hline
+            2 & 11000110 & C6 \\ \hline
+        \end{tabular}
+    \end{subtable}%
+    \begin{subtable}{.5\linewidth}
+      \centering
+        \caption{}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Address & Binary & Hex \\ \hline
+            765 & 11111000 & F8 \\ \hline
+            766 & 01111110 & 7E \\ \hline
+            767 & 00111011 & 3B \\ \hline
+        \end{tabular}
+    \end{subtable} 
+\end{table}
+
 where the list index is the address in memory. Since the value is shifted right, we had to invert the original input and slice it into 8 bits.
 This was verified as seen in Figure \ref{fpga1} and Figure \ref{fpga2}. Of the five seven segment displays, the left three are used to show the counter as it increments from 000 to 2FF in base 16. The right two displays are used to show the output byte as we shift it into the byte-shift register. We then took the 8 LSB and displayed it using the LEDs present in the FPGA. According to the output from the python script, the least significant byte for that input is: 10111111. This is also verified from Figure \ref{fpga2} as the right most 8 LEDs are correctly turned on in that order.\par
 \begin{figure}[ht]
@@ -219,9 +225,8 @@ This was verified as seen in Figure \ref{fpga1} and Figure \ref{fpga2}. Of the f
 \caption{The initial and final state of the simulation as the data from ROM is put into the shift register. The LEDs represent the 8 output LSB bits.}
 \label{fig:init}
 \end{figure}
-\newpage
-Since the logic analyzer did not work, we were unable to test extensively using the display. Thus, to do the best test possible, we decided to use a slide switch to transition between two states of the seven segment decoder. The first state shown in Figure \ref{fpgaswd} shows us that when the switch is down (logical '0') the display shows us exactly what used to be. The new addition is when the switch is up (logical '1'), the seven segment display switches to show us three least significant bytes: \texttt{E3B1BE}.
-This matches exactly what the python script outputs as the least significant 24 bits: \texttt{1110 0011 1011 0001 1011 1111}.
+Since the logic analyzer did not work, we were unable to test extensively using the display. Thus, to do the best test possible, we decided to use a slide switch to transition between two states of the seven segment decoder. The first state shown in Figure \ref{fpgaswd} shows us that when the switch is down (logical '0') the display shows us exactly what used to be. The new addition is when the switch is up (logical '1'), the seven segment display switches to show us three least significant bytes: \texttt{E3B1BF}.
+This matches exactly what the python script outputs as the least significant 24 bits: \texttt{1110 0011 1011 0001 1011 1111}.\par
 \begin{figure}[ht]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -236,9 +241,10 @@ This matches exactly what the python script outputs as the least significant 24 
   \caption{State with switch up}
   \label{fpgaswu}
 \end{subfigure}
-\caption{A slightly extenstive test to check for the outputs.}
+\caption{A slightly extensive test to check for the outputs.}
 \label{fig:second}
 \end{figure}
+These hardware results prove that even when combined with the CSU, our module correctly outputs the data as expected. There is always the chance of 'what if the software tests are wrong?', but I am confident in my python script. These results go alongside the software simulation as both software and hardware match the testbench simulation.
 
 \newpage
 \section*{Appendix}
