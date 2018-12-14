@@ -1,0 +1,131 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage[utf8]\{inputenc\}\
+\\usepackage\{graphicx\}\
+\
+\\title\{ECE559 Report\}\
+\\author\{cl344 \}\
+\\date\{December 2018\}\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\section\{Static Timing Analysis\}\
+A comprehensive static timing analysis includes analysis of register-to-register, I/O, and asynchronous reset paths. It verifies circuit performance and detect possible timing violations by investigating data required times, data arrival times, and clock arrival times. The Timing Analyzer determines the timing relationships that must be met for the design to correctly function, and checks arrival times against required times to verify timing. \
+In our design, we focus on the timing constraints on internal register-to-register paths and are not worrying about the I/O constraints. The Timing Analysis is operated with the Base Clock at 50 MHz. We used \\texttt\{Post-fit\} and \\texttt\{Fast-corner\} for a full timing analysis. \
+\
+\\subsection\{Identifications\}\
+\\subsubsection\{Worst Case Slack\}\
+The Timing Analyzer reports the result of clock setup checks as slack values. Slack is the margin by which a timing requirement is met or not met. Positive slack indicates the margin by which a requirement is met, and negative slack indicates the margin by which a requirement is not met. The Timing Analyzer determines clock setup slack as shown in the following equation for internal register-to-register paths, where $slack$ is Clock Setup Slack Time, $t_\{require\}$ is Data Required Time and $t_\{arrive\}$ is Data Arrival Time.\
+\\begin\{equation\}\
+slack = t_\{require\} \'96 t_\{arrive\}\
+\\end\{equation\}\
+\
+\\noindent Since slack indicates that the clock meets the requirement with some margin, larger slack means better performance. According to the \\texttt\{Report All Core Time\} page in our design, The Worst Case Slack against Setup Violations is 13.307 ns. \
+From this result, we are confident that we don't have any failing path since there's no negative slack for the clock domain. \
+\\subsubsection\{Maximum Frequency\}\
+According to \\texttt\{Report FMax Summary\}, we find that the maximum frequency at which our design can be clocked is 149.41 MHz. \
+\
+\\subsubsection\{Critical Path\}\
+By using \\texttt\{Report Worst Case Path\} function, we find that the worst data delay is 6.528 ns and the path of Worst Case Slack is: \\\\\
+\
+\\noindent \\texttt\{shiftreg\\_buf:input\\_shiftreg\\_inst1|mem[1464] : (0.232 ns)\}\\\\\
+\\texttt\{input\\_shiftreg\\_inst1|mem[1464]|q : (0 ns)\}\\\\\
+\\texttt\{reg\\_inst|Q[1464]|asdata : (5.89 ns)\}\\\\\
+\\texttt\{reg6144:comb\\_6149|Q[1464] : (0.406 ns)\}\\\\\
+\
+\\noindent According to the Path above, \\texttt\{reg\\_inst|Q[1464]|asdata\} is the Critical Path since it takes the longest delay which is 5.89 ns. According to the path name, we locate this path in the second buffer of our design. \\\\\
+\
+\\noindent The plot of Worst Case Path is shown in the plot below. The green region represents the slack area. We can see that with the clock period of 20 ns, our design is fairly fast since the worst slack period is longer than half of the clock cycle. \
+\\begin\{figure\}[h!]\
+\\centering\
+\\includegraphics[scale=0.4]\{pathpic2.PNG\}\
+\\caption\{Worst Case Path\}\
+\\label\{fig1\}\
+\\end\{figure\}\
+\
+\\subsection\{Max Throughput\}\
+We are using the following equation to calculate Throughput, where $data_\{period\}$ represents Data Per Clock Period and $freq$ represents Clock Frequency. \
+\\begin\{equation\}\
+    throughput = data_\{period\} * freq\
+\\end\{equation\}\
+According to the equation above, with Max Frequency as 149.41 MHz and data per clock period as 1 bits, we have\
+\
+    $Throughput = 1 bits * 149.41 MHz = 0.15 bits/ns = 150 MB/sec$.\
+\
+\\noindent According to the calculation above, the Max Throughput is estimated to be 150 MB/sec. \
+\
+\
+\\subsection\{Modification\}\
+The initial design includes redundant nodes, which yields a Worst Case Slack as 8.079 ns and Max Frequency as 83.89 MHz. An example of the redundant nodes is show in the picture below where the declaration of \\texttt\{remap\\_in\} is not necessary.\
+\\begin\{figure\}[h!]\
+\\centering\
+\\includegraphics[scale=0.4]\{node.png\}\
+\\caption\{Redundant Node\}\
+\\label\{fig1\}\
+\\end\{figure\}\
+\
+\\noindent After removing the redundant wires, the Worst Case Slack is 13.307 ns and the Max Frequency increases to 149.41 MHz. We find huge time improvement after removing the redundant nodes which is very surprising that wiring between two nodes may take such a huge amount of extra time. The trade-off here is between the easiness in understanding the code and the time performance of the design.\
+\
+\\subsubsection\{Worst Path Comparison\}\
+The worst slowest path before node reduction is 11.216 ns, and after the node reduction is 5.89 ns. We see huge timing improvements.\
+\\begin\{itemize\}\
+\\item Before Wire Reduction: \\\\\
+\\texttt\{shiftreg\\_buf:input\\_shiftreg\\_inst1|mem[4653] : (0.232 ns)\}\\\\\
+\\texttt\{input\\_shiftreg\\_inst1|mem[4653]|q : (0 ns)\}\\\\\
+\\texttt\{comb\\_6149|Q[4653]|asdata : (11.216 ns)\}\\\\\
+\\texttt\{reg6144:comb\\_6149|Q[4653] : (0.406 ns)\}\\\\\
+\
+\\item After Wire Reduction: \\\\\
+\\texttt\{shiftreg\\_buf:input\\_shiftreg\\_inst1|mem[1464] : (0.232 ns)\}\\\\\
+\\texttt\{input\\_shiftreg\\_inst1|mem[1464]|q : (0 ns)\}\\\\\
+\\texttt\{reg\\_inst|Q[1464]|asdata : (5.89 ns)\}\\\\\
+\\texttt\{reg6144:comb\\_6149|Q[1464] : (0.406 ns)\}\\\\\
+\
+\\end\{itemize\}\
+\
+\\subsubsection\{All Clock Histogram Comparison\}\
+According to the All Clock Histogram shown below, most of the slack are between 16 ns and 19 ns which doesn't change a lot before and after node reduction. However a samll amount of slack less than 13 ns are improved because of the node reduction. We can see that the node reduction greatly improved the worst slacks while doesn't have big influence on other slacks. \
+\\begin\{figure\}[h!]\
+\\centering\
+\\includegraphics[scale=0.5]\{hist1.PNG\}\
+\\caption\{All Clock Histogram before node reduction\}\
+\\label\{fig1\}\
+\\end\{figure\}\
+\
+\\begin\{figure\}[h!]\
+\\centering\
+\\includegraphics[scale=0.4]\{hist2.PNG\}\
+\\caption\{All Clock Histogram after node reduction\}\
+\\label\{fig1\}\
+\\end\{figure\}\
+\
+\
+\\section\{FSM\}\
+\
+\\begin\{figure\}[h!]\
+\\centering\
+\\includegraphics[scale=0.3]\{fsm_cheng.png\}\
+\\caption\{All Clock Histogram after node reduction\}\
+\\label\{fig1\}\
+\\end\{figure\}\
+The FSM in our design is implemented in the index generating module. This FSM contains four states. The state in this FSM doesn't make output, but manipulate the 13-bit register \\texttt\{cnt\}, which relates to the output of the module. The function of each state is listed below.\
+\\begin\{itemize\}\
+\\item State00 is the waiting state. It waits for a \\texttt\{ready\} signal to be pulled high to go to State01. If the \\texttt\{ready\} signal stays low, State00 keeps going back to itself. At State00, \\texttt\{cnt\} is set to 0. \
+\\item State01 is the counting state. This state goes to State10 is the counting is complete, otherwise it goes to itself. The counting is considered complete if either the \\texttt\{kout\} signal is 0 and \\texttt\{cnt\} is 1055 or the \\texttt\{kout\} signal is 1 and \\texttt\{cnt\} is 6143. At State01, \\texttt\{cnt\} is incremented by 1. \
+\
+\\item State10 is a reserved state to accommodate with any signal indicating data readiness required in the future. \
+\
+\
+\\item State11 is a reserved state to accommodate with any signal indicating data readiness required in the future. \
+\\end\{itemize\}\
+\
+\\end\{document\}\
+}
