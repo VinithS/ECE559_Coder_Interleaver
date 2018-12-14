@@ -25,19 +25,19 @@
 	{\large Fall 2018\par}
 \end{titlepage}
 
-\newpage 
+\newpage
 \section{3GPP LTE Advanced Wireless System}
     \subsection{Introduction}
         The next advancement on wireless communication was proposed by the 3rd Generation Partnership Program (3GPP). Formally a candidate 4G to ITU-T in 2009, it was standardized in March of 2011.
         The biggest benefit of LTE Advanced is the ability to take advantage of avdanced topology networks. The usage of optimized heterogeneous networks and utilizing macrocells with low power nodes such as pico and femto cells create a much better network compared to macrocells (wide area high power base stations that covers a large radius). LTE Advanced also introduces multicarrier so we can utilize wider bandwidth, up to 100 MHz, which will support high data rates.
-        
+
         Our focus this semester lied on the coding, multiplexing and mapping to physical channels for E-UTRA section of the LTE Advanced specification as seen in 3GPP TS 36.212 V10.5.0. The sub-systems extracted from this document that our class worked on is as follows:
         \begin{itemize}
             \item Code block segmentation and CRC
             \item Convolutional encoder
             \item Turbo-code constituent encoder
             \item Turbo-code interleaver
-            \item Sub-block interleaver and multiplexer 
+            \item Sub-block interleaver and multiplexer
         \end{itemize}
     \subsection{Internal Interleaver}
         Our group was responsible for the turbo coder internal interleaver. The purpose of this sub-system is to block interleave the data, frame quality indicator (CRC), and the reserve bits input to the turbo encoder. This interleaving happens through a index generator function defined in section 5.1.3.2.3 of the document. First we define an index generator function that selects the certain index of output bits from a certain input bit index. We will call this $\Pi(i)$:
@@ -48,43 +48,31 @@
             \begin{tabular}{|c|c|c|}
             \hline
                 $K$ & $f_1$ & $f_2$  \\ \hline
-                1056 & 17 & 66 \\ \hline 
+                1056 & 17 & 66 \\ \hline
                 6144 & 263 & 480 \\ \hline
             \end{tabular}
         \end{center}
         Using these values, we can generate the output bits using the following function:
         $$c'_i = c_{\Pi(i)} \quad\forall i \in \{0, 1, 2, ..., K\}$$
         where $c_i$ is the $i^{th}$ bit of the input sequence and $c'_i$ is the $i^{th}$ bit of the output sequence defined by the function $\Pi(i)$.
-        
+
         This sub-module is part of the larger sub-system, turbo-code constituent encoder. The turbo encoder's purpose is to encode the incoming data, CRC, and the two reserved bits. During encoding, the output tail sequence is also added. The encoder generates the output based on the code rate. In our case, the code rate was 1/3. It uses two systematic, recursive, convolutional encoders connected in parallel with an interleaver for the second encoder. The two recursive convolutional codes are called the constituents codes of the turbo code. Since there is delay after the interleaver processes the data, the second encoder must account for this delay of the incoming data sequence.
 \section{Description of the design}
-  %   2.  Description of the design, including:
-  %       (mostly yao)
-  %        o  interfaces to other functions in the encoder stack
-  %       (mostly yao)
-  %        o  identification of the data path through the function and
-		%     how the data path is controlled by FSMs, shown using a
-		% 	block diagram of the design as implemented. 
-  %        o  for data path and associated combinational logic (not FSMs), include
-  %           the RTL view from Quartus, with a brief prose description;  this can
-  %           be used to describe the block diagram mentioned in the
-		% 	previous bullet
+One of the important changes we want to highlight is the \texttt{outi} port. According to the 3GPP document's block diagram as seen in Figure \ref{fig:blockd}, the first constituent encoder takes in the sequence directly from the CSU, where as the other encoder has to wait some amount of cycles determined by the bit-serial vs. byte-serial. Trying to implement this exact design would create multiple ports in both ours and constituent encoder's design. Thus, we decided that the interleaver group would be responsible for serializing and feeding both the original and interleaved data directly to the constituent encoders.
 
-		% (mostly yao)
-  %        o  FSM designs, with pictorial description (state transition diagrams)
-  %           and text, clearly indicating what each state
-  %           represents, how inputs determine the next state and Moore and Mealy
-  %           outputs for each state, and also an indication of how the FSM is
-  %           related to data flow through the function
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{files/blockdiagram}
+	\label{fig:blockd}
+	\captionof{figure}{The high level design shown in the 3GPP document.}
+\end{center}
+
 The design overview is shown in the following block diagram, which includes functional blocks, interfaces (with more description later), and the data path:
 
 %block diagram/rtl viewer
 \begin{center}
-    \includegraphics[width=15cm, angle=0]{files/rtl_all}
+    \includegraphics[width=\textwidth]{files/rtl_all}
     \captionof{figure}{Block diagram of functional blocks}
 \end{center}
-
-% -interfaces enumeration \& description
 Here are the enumeration \& description of interfaces to other functions in the encoder stack:
 \begin{itemize}
     \item {\texttt input} {\bf clock}: The clock.
@@ -94,12 +82,12 @@ Here are the enumeration \& description of interfaces to other functions in the 
     \item {\texttt input} {\bf shift\_en}: This input control signal comes from code block segmentation module. At the clock rise, assertion of this makes the input byte shifted into the input shift register buffer.
     \item {\texttt input} {\bf ready\_in}: This input control signal comes from code block segmentation module. It indicates the finish of transferring of the data block. Once this signal is asserted, the output FSM starts operating and outputting to the turbo constituent coder module.
     \item {\texttt output} {\bf k\_size\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the size of the data block being output right now.
-    \item {\texttt output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle. 
+    \item {\texttt output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle.
     \item {\texttt output} {\bf outi}: This output signal goes to the turbo constituent coder module. It's the c$_i$ output in the 3GPP document. It's also the output data block in original sequence.
     \item {\texttt output} {\bf outpii}: This output signal goes to the turbo constituent coder module. It's the c$_{\pi i}$ output in the document. It's also the output data block in a remapped sequence indicated by the 3GPP document.
 \end{itemize}
 
-In terms of the datapath inside our module, there's not much combination logic but a bunch of wiring between functional blocks or even inside certain block. 
+In terms of the datapath inside our module, there's not much combination logic but a bunch of wiring between functional blocks or even inside certain block.
 
 \begin{enumerate}
     \item The data is firstly shifted into the "shiftreg" buffer most of the time one byte per 8 cycle from the code block segmentation module. In terms of the endianness, the right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index. The code block segmentation module owns the control signal of "{\bf shift\_en}" to adjust timing to their output.
@@ -203,7 +191,7 @@ We skipped the bit-serial implementation and tested a byte-serial implementation
             766 & 01111110 & 7E \\ \hline
             767 & 00111011 & 3B \\ \hline
         \end{tabular}
-    \end{subtable} 
+    \end{subtable}
 \end{table}
 
 where the list index is the address in memory. Since the value is shifted right, we had to invert the original input and slice it into 8 bits.
