@@ -75,16 +75,16 @@ The design overview is shown in the following block diagram, which includes func
 \end{center}
 Here are the enumeration \& description of interfaces to other functions in the encoder stack:
 \begin{itemize}
-    \item {\texttt input} {\bf clock}: The clock.
-    \item {\texttt input} {\bf rst}: The reset input.
-    \item {\texttt input} {\bf k\_size\_6144}: The indication of the block size being transferred into our module from the code block segmentation module. This bit should be asserted 0 if block size is 1056, and asserted 1 if block size is 6144 when the ready\_in signal was asserted.
-    \item {\texttt input} {\bf [7:0] databyte\_in}: The input data byte of the data block from the code block segmentation module. This data is shifted into the "shift register". The right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index.
-    \item {\texttt input} {\bf shift\_en}: This input control signal comes from code block segmentation module. At the clock rise, assertion of this makes the input byte shifted into the input shift register buffer.
-    \item {\texttt input} {\bf ready\_in}: This input control signal comes from code block segmentation module. It indicates the finish of transferring of the data block. Once this signal is asserted, the output FSM starts operating and outputting to the turbo constituent coder module.
-    \item {\texttt output} {\bf k\_size\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the size of the data block being output right now.
-    \item {\texttt output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle.
-    \item {\texttt output} {\bf outi}: This output signal goes to the turbo constituent coder module. It's the c$_i$ output in the 3GPP document. It's also the output data block in original sequence.
-    \item {\texttt output} {\bf outpii}: This output signal goes to the turbo constituent coder module. It's the c$_{\pi i}$ output in the document. It's also the output data block in a remapped sequence indicated by the 3GPP document.
+    \item \texttt{input} {\bf clock}: The clock.
+    \item \texttt{input} {\bf rst}: The reset input.
+    \item \texttt{input} {\bf k\_size\_6144}: The indication of the block size being transferred into our module from the code block segmentation module. This bit should be asserted 0 if block size is 1056, and asserted 1 if block size is 6144 when the ready\_in signal was asserted.
+    \item \texttt{input} {\bf [7:0] databyte\_in}: The input data byte of the data block from the code block segmentation module. This data is shifted into the "shift register". The right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index.
+    \item \texttt{input} {\bf shift\_en}: This input control signal comes from code block segmentation module. At the clock rise, assertion of this makes the input byte shifted into the input shift register buffer.
+    \item \texttt{input} {\bf ready\_in}: This input control signal comes from code block segmentation module. It indicates the finish of transferring of the data block. Once this signal is asserted, the output FSM starts operating and outputting to the turbo constituent coder module.
+    \item \texttt{output} {\bf k\_size\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the size of the data block being output right now.
+    \item \texttt{output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle.
+    \item \texttt{output} {\bf outi}: This output signal goes to the turbo constituent coder module. It's the c$_i$ output in the 3GPP document. It's also the output data block in original sequence.
+    \item \texttt{output} {\bf outpii}: This output signal goes to the turbo constituent coder module. It's the c$_{\pi i}$ output in the document. It's also the output data block in a remapped sequence indicated by the 3GPP document.
 \end{itemize}
 
 In terms of the datapath inside our module, there's not much combination logic but a bunch of wiring between functional blocks or even inside certain block.
@@ -96,31 +96,145 @@ In terms of the datapath inside our module, there's not much combination logic b
     \item The original and the remapped data blocks are fed into two muxes separately and the FSM outputs an ascending sequence to select the corresponding output bits to the "turbo constituent coder" module.
 \end{enumerate}
 
-Below is the state transition diagram for the counter module, which is a very simple FSM.
+Below is the state transition diagram for the counter module, which is a very simple FSM.\\
 
 %state transition diagram
 \begin{center}
-    \includegraphics[width=14cm, angle=0]{files/states}
+    \includegraphics[width=14cm, angle=0]{fsm_cheng.png}
     \captionof{figure}{State transition diagram of output FSM}
 \end{center}
+% \begin{minipage}{1.0\textwidth}
+% \includegraphics[width=14cm, angle=0]{fsm_cheng.png}
+% \centering
+% \captionof{figure}{State transition diagram of output FSM}
+% \centering
+% \end{minipage}
+% \bigskip
 
-(!!!!!cheng can you talk abt the fsm?)
--o  FSM designs, with pictorial description (s)
-            and text, clearly indicating what each state
-            represents, how inputs determine the next state and Moore and Mealy
-            outputs for each state, and also an indication of how the FSM is
-            related to data flow through the function
+This FSM contains four states. The state in this FSM doesn't make output, but manipulate the 13-bit register \texttt{cnt}, which relates to the output of the module. The function of each state is listed below.
+
+\begin{itemize}
+\item State00 is the waiting state. It waits for a \texttt{ready} signal to be pulled high to go to State01. If the \texttt{ready} signal stays low, State00 keeps going back to itself. At State00, \texttt{cnt} is set to 0. 
+\item State01 is the counting state. This state goes to State10 is the counting is complete, otherwise it goes to itself. The counting is considered complete if either the \texttt{kout} signal is 0 and \texttt{cnt} is 1055 or the \texttt{kout} signal is 1 and \texttt{cnt} is 6143. At State01, \texttt{cnt} is incremented by 1. 
+
+\item State10 is a reserved state to accommodate with any signal indicating data readiness required in the future. 
 
 
-\section{Static timing analysis}
-(mostly cheng)
-    3.  Static timing analysis
-		 o  from the static timing analysis results, identify (a) worst-case slack
-		 	against setup violations;  (b) maximum frequency at which the design
-			can be clocked;  (c) the critical path corresponding to the worst-case
-			slack.
-		 o	based on the max frequency, comment on the max throughput that can
-		 	be sustained by the function given the current design
+\item State11 is a reserved state to accommodate with any signal indicating data readiness required in the future. 
+\end{itemize}
+% (!!!!!cheng can you talk abt the fsm?)
+% -o  FSM designs, with pictorial description (s)
+%             and text, clearly indicating what each state
+%             represents, how inputs determine the next state and Moore and Mealy
+%             outputs for each state, and also an indication of how the FSM is
+%             related to data flow through the function
+
+
+\section{Static Timing Analysis}
+A comprehensive static timing analysis includes analysis of register-to-register, I/O, and asynchronous reset paths. It verifies circuit performance and detect possible timing violations by investigating data required times, data arrival times, and clock arrival times. The Timing Analyzer determines the timing relationships that must be met for the design to correctly function, and checks arrival times against required times to verify timing. 
+In our design, we focus on the timing constraints on internal register-to-register paths and are not worrying about the I/O constraints. The Timing Analysis is operated with the Base Clock at 50 MHz. We used \texttt{Post-fit} and \texttt{Fast-corner} for a full timing analysis. 
+
+\subsection{Identifications}
+\subsubsection{Worst Case Slack}
+The Timing Analyzer reports the result of clock setup checks as slack values. Slack is the margin by which a timing requirement is met or not met. Positive slack indicates the margin by which a requirement is met, and negative slack indicates the margin by which a requirement is not met. The Timing Analyzer determines clock setup slack as shown in the following equation for internal register-to-register paths, where $slack$ is Clock Setup Slack Time, $t_{require}$ is Data Required Time and $t_{arrive}$ is Data Arrival Time.
+\begin{equation}
+slack = t_{require} – t_{arrive}
+\end{equation}
+
+\noindent Since slack indicates that the clock meets the requirement with some margin, larger slack means better performance. According to the \texttt{Report All Core Time} page in our design, The Worst Case Slack against Setup Violations is 13.307 ns. 
+From this result, we are confident that we don't have any failing path since there's no negative slack for the clock domain. 
+\subsubsection{Maximum Frequency}
+According to \texttt{Report FMax Summary}, we find that the maximum frequency at which our design can be clocked is 149.41 MHz. 
+
+\subsubsection{Critical Path}
+By using \texttt{Report Worst Case Path} function, we find that the worst data delay is 6.528 ns and the path of Worst Case Slack is: \\
+
+\noindent \texttt{shiftreg\_buf:input\_shiftreg\_inst1|mem[1464] : (0.232 ns)}\\
+\texttt{input\_shiftreg\_inst1|mem[1464]|q : (0 ns)}\\
+\texttt{reg\_inst|Q[1464]|asdata : (5.89 ns)}\\
+\texttt{reg6144:comb\_6149|Q[1464] : (0.406 ns)}\\
+
+\noindent According to the Path above, \texttt{reg\_inst|Q[1464]|asdata} is the Critical Path since it takes the longest delay which is 5.89 ns. According to the path name, we locate this path in the second buffer of our design. \\
+
+\noindent The plot of Worst Case Path is shown in the plot below. The green region represents the slack area. We can see that with the clock period of 20 ns, our design is fairly fast since the worst slack period is longer than half of the clock cycle. 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{pathpic2.PNG}
+\caption{Worst Case Path}
+\label{fig1}
+\end{figure}
+
+\subsection{Max Throughput}
+We are using the following equation to calculate Throughput, where $data_{period}$ represents Data Per Clock Period and $freq$ represents Clock Frequency. 
+\begin{equation}
+    throughput = data_{period} * freq
+\end{equation}
+According to the equation above, with Max Frequency as 149.41 MHz and data per clock period as 1 bits, we have
+
+    $Throughput = 1 bits * 149.41 MHz = 0.15 bits/ns = 150 MB/sec$.
+
+\noindent According to the calculation above, the Max Throughput is estimated to be 150 MB/sec. 
+
+
+\subsection{Modification}
+The initial design includes redundant nodes, which yields a Worst Case Slack as 8.079 ns and Max Frequency as 83.89 MHz. An example of the redundant nodes is show in the picture below where the declaration of \texttt{remap\_in} is not necessary.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{node.png}
+\caption{Redundant Node}
+\label{fig1}
+\end{figure}
+
+\noindent After removing the redundant wires, the Worst Case Slack is 13.307 ns and the Max Frequency increases to 149.41 MHz. We find huge time improvement after removing the redundant nodes which is very surprising that wiring between two nodes may take such a huge amount of extra time. The trade-off here is between the easiness in understanding the code and the time performance of the design.
+
+\subsubsection{Worst Path Comparison}
+The worst slowest path before node reduction is 11.216 ns, and after the node reduction is 5.89 ns. We see huge timing improvements.
+\begin{itemize}
+\item Before Wire Reduction: \\
+\texttt{shiftreg\_buf:input\_shiftreg\_inst1|mem[4653] : (0.232 ns)}\\
+\texttt{input\_shiftreg\_inst1|mem[4653]|q : (0 ns)}\\
+\texttt{comb\_6149|Q[4653]|asdata : (11.216 ns)}\\
+\texttt{reg6144:comb\_6149|Q[4653] : (0.406 ns)}\\
+
+\item After Wire Reduction: \\
+\texttt{shiftreg\_buf:input\_shiftreg\_inst1|mem[1464] : (0.232 ns)}\\
+\texttt{input\_shiftreg\_inst1|mem[1464]|q : (0 ns)}\\
+\texttt{reg\_inst|Q[1464]|asdata : (5.89 ns)}\\
+\texttt{reg6144:comb\_6149|Q[1464] : (0.406 ns)}\\
+
+\end{itemize}
+
+\subsubsection{All Clock Histogram Comparison}
+According to the All Clock Histogram shown below, most of the slack are between 16 ns and 19 ns which doesn't change a lot before and after node reduction. However a samll amount of slack less than 13 ns are improved because of the node reduction. We can see that the node reduction greatly improved the worst slacks while doesn't have big influence on other slacks.\\ 
+\begin{center}
+\begin{minipage}{1.0\textwidth}
+\centering
+\includegraphics[width=15cm]{hist1.PNG}
+\captionof{figure}{All Clock Histogram after node reduction}
+\end{minipage}
+
+\begin{minipage}{1.0\textwidth}
+\centering
+\includegraphics[width=15cm]{hist2.PNG}
+\captionof{figure}{All Clock Histogram after node reduction}
+\end{minipage}
+\end{center}
+
+
+
+
+% \section{FSM}
+
+
+
+% (mostly cheng)
+%     3.  Static timing analysis
+% 		 o  from the static timing analysis results, identify (a) worst-case slack
+% 		 	against setup violations;  (b) maximum frequency at which the design
+% 			can be clocked;  (c) the critical path corresponding to the worst-case
+% 			slack.
+% 		 o	based on the max frequency, comment on the max throughput that can
+% 		 	be sustained by the function given the current design
 \section{Simulation results}
 % (mostly yao)
 % 	4.  Simulation results
@@ -131,26 +245,41 @@ Below is the state transition diagram for the counter module, which is a very si
 %             respect to operation and performance of the subsystem
 
 Firstly, there's a python script that calculates the output sequence give the input data block. Below is a pair of console outputs generated by the python script:
-
-\begin{figure}[ht]
-\centering
+\begin{center}
 %ci
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.95\linewidth]{files/ci}
-  \caption{c$_i$}
-  \label{ci}
-\end{subfigure}%
-%cpii
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.95\linewidth]{files/cpii}
-  \caption{c$_{\pi (i)}$}
-  \label{cpii}
-\end{subfigure}
-\caption{The input and output values from a testbench simulation}
-\label{fig:tb}
-\end{figure}
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=8cm, angle=0]{files/ci.png}
+\centering
+\captionof{figure}{c$_i$}
+\end{minipage}
+%ci
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=7.5cm, angle=0]{files/cpii.png}
+\centering
+\captionof{figure}{c$_{\pi i}$}
+\centering
+\end{minipage}
+\end{center}
+\bigskip
+% \begin{figure}[ht]
+% \centering
+% %ci
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+%   \includegraphics[width=0.95\linewidth]{files/ci}
+%   \caption{c$_i$}
+%   \label{ci}
+% \end{subfigure}%
+% %cpii
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+%   \includegraphics[width=0.95\linewidth]{files/cpii}
+%   \caption{c$_{\pi (i)}$}
+%   \label{cpii}
+% \end{subfigure}
+% \caption{The input and output values from a testbench simulation}
+% \label{fig:tb}
+% \end{figure}
 
 On the left is the original data block and on the right is the remapped data block. The original data block is just the repeating pattern byte "11111011". Again, the right-most bit, or LSB, is the earliest bit in the sequence or bit with smaller index. In the console output, the right-most bit, or LSB, is also the earliest bit in the sequence or bit with smaller index. The left most bit is the last output bit. This script is used to calculate the output sequence.\par
 The functional correctness of the overall module is verified with a testbench mimicking inputs from the code block segmentation module and monitoring the outputs to the turbo constituent coder.\par
