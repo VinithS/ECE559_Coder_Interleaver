@@ -85,6 +85,7 @@ Here are the enumeration \& description of interfaces to other functions in the 
     \item \texttt{output} {\bf ready\_out}: This output signal goes to the turbo constituent coder module. It tells the coder the start of outputting the current data block. Only asserted for one cycle.
     \item \texttt{output} {\bf outi}: This output signal goes to the turbo constituent coder module. It's the c$_i$ output in the 3GPP document. It's also the output data block in original sequence.
     \item \texttt{output} {\bf outpii}: This output signal goes to the turbo constituent coder module. It's the c$_{\pi i}$ output in the document. It's also the output data block in a remapped sequence indicated by the 3GPP document.
+    \item \texttt{output} {\bf process\_complete}: This is an unimplemented output signal since testing in the integration is needed. This output signal goes to the code block segmentation module. It tells the code block segmentation module that the previous code block in the secondary buffer has been completely processed and it's OK to assert {\bf ready\_in} to load in the next code block for processing.
 \end{itemize}
 
 In terms of the datapath inside our module, there's not much combination logic but a bunch of wiring between functional blocks or even inside certain block.

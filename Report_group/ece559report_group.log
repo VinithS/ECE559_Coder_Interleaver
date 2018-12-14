@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.10.21)  14 DEC 2018 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.10.21)  14 DEC 2018 11:25
 entering extended mode
 **D:/GitHubRepo/ECE559_Coder_Interleaver/Report_group/ece559report_group.tex
 (D:/GitHubRepo/ECE559_Coder_Interleaver/Report_group/ece559report_group.tex
@@ -372,115 +372,116 @@ File: files/rtl_all.png Graphic file (type png)
 Package pdftex.def Info: files/rtl_all.png  used on input line 73.
 (pdftex.def)             Requested size: 469.75502pt x 106.0261pt.
  [2 <./files/blockdiagram.png>] [3 <./files/rtl_all.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
 
  []
 
 <fsm_cheng.png, id=31, 973.6375pt x 500.87125pt>
 File: fsm_cheng.png Graphic file (type png)
 <use fsm_cheng.png>
-Package pdftex.def Info: fsm_cheng.png  used on input line 103.
+Package pdftex.def Info: fsm_cheng.png  used on input line 104.
 (pdftex.def)             Requested size: 398.33858pt x 204.91525pt.
-[4 <./fsm_cheng.png>]
+[4] [5 <./fsm_cheng.png>]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no “ in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 152--156
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--158
+Underfull \hbox (badness 10000) in paragraph at lines 153--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
  []
 
 <pathpic2.PNG, id=39, 855.69687pt x 288.57813pt>
 File: pathpic2.PNG Graphic file (type png)
 <use pathpic2.PNG>
-Package pdftex.def Info: pathpic2.PNG  used on input line 162.
+Package pdftex.def Info: pathpic2.PNG  used on input line 163.
 (pdftex.def)             Requested size: 342.27267pt x 115.4292pt.
-<node.png, id=40, 595.22375pt x 220.825pt>
-File: node.png Graphic file (type png)
-<use node.png>
-Package pdftex.def Info: node.png  used on input line 183.
-(pdftex.def)             Requested size: 238.08528pt x 88.32843pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6 <./pathpic2.PNG>]
-Underfull \hbox (badness 10000) in paragraph at lines 193--198
+[6]
+<node.png, id=44, 595.22375pt x 220.825pt>
+File: node.png Graphic file (type png)
+<use node.png>
+Package pdftex.def Info: node.png  used on input line 184.
+(pdftex.def)             Requested size: 238.08528pt x 88.32843pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--199
+
+ []
+
+[7 <./pathpic2.PNG> <./node.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 200--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--204
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 208--209
-
- []
-
-<hist1.PNG, id=46, 820.56563pt x 449.68pt>
+<hist1.PNG, id=50, 820.56563pt x 449.68pt>
 File: hist1.PNG Graphic file (type png)
 <use hist1.PNG>
-Package pdftex.def Info: hist1.PNG  used on input line 212.
+Package pdftex.def Info: hist1.PNG  used on input line 213.
 (pdftex.def)             Requested size: 426.79134pt x 233.88297pt.
-[7 <./node.png>]
 <hist2.PNG, id=51, 1006.76125pt x 427.5975pt>
 File: hist2.PNG Graphic file (type png)
 <use hist2.PNG>
-Package pdftex.def Info: hist2.PNG  used on input line 218.
+Package pdftex.def Info: hist2.PNG  used on input line 219.
 (pdftex.def)             Requested size: 426.79134pt x 181.26654pt.
-<files/ci.png, id=52, 224.037pt x 137.313pt>
+[8 <./hist1.PNG>]
+<files/ci.png, id=56, 224.037pt x 137.313pt>
 File: files/ci.png Graphic file (type png)
 <use files/ci.png>
-Package pdftex.def Info: files/ci.png  used on input line 251.
+Package pdftex.def Info: files/ci.png  used on input line 252.
 (pdftex.def)             Requested size: 227.62204pt x 139.51263pt.
-<files/cpii.png, id=53, 231.264pt x 155.3805pt>
+<files/cpii.png, id=57, 231.264pt x 155.3805pt>
 File: files/cpii.png Graphic file (type png)
 <use files/cpii.png>
-Package pdftex.def Info: files/cpii.png  used on input line 257.
+Package pdftex.def Info: files/cpii.png  used on input line 258.
 (pdftex.def)             Requested size: 213.39566pt x 143.38327pt.
- [8 <./hist1.PNG> <./hist2.PNG>]
-<files/modelsim_result.png, id=59, 459.51675pt x 161.403pt>
+<files/modelsim_result.png, id=58, 459.51675pt x 161.403pt>
 File: files/modelsim_result.png Graphic file (type png)
 <use files/modelsim_result.png>
-Package pdftex.def Info: files/modelsim_result.png  used on input line 289.
+Package pdftex.def Info: files/modelsim_result.png  used on input line 290.
 (pdftex.def)             Requested size: 398.33858pt x 139.91705pt.
- [9 <./files/ci.png> <./files/cpii.png> <./files/modelsim_result.png>] [10]
-<files/add_zero.jpg, id=70, 1296.845pt x 972.63374pt>
+ [9 <./hist2.PNG> <./files/ci.png> <./files/cpii.png>]
+[10 <./files/modelsim_result.png>]
+<files/add_zero.jpg, id=69, 1296.845pt x 972.63374pt>
 File: files/add_zero.jpg Graphic file (type jpg)
 <use files/add_zero.jpg>
-Package pdftex.def Info: files/add_zero.jpg  used on input line 332.
+Package pdftex.def Info: files/add_zero.jpg  used on input line 333.
 (pdftex.def)             Requested size: 232.53001pt x 174.39867pt.
-<files/add_2ff.jpg, id=71, 1231.60126pt x 923.45pt>
+<files/add_2ff.jpg, id=70, 1231.60126pt x 923.45pt>
 File: files/add_2ff.jpg Graphic file (type jpg)
 <use files/add_2ff.jpg>
-Package pdftex.def Info: files/add_2ff.jpg  used on input line 338.
+Package pdftex.def Info: files/add_2ff.jpg  used on input line 339.
 (pdftex.def)             Requested size: 232.53001pt x 174.34415pt.
-<files/switch_down.jpg, id=72, 1231.60126pt x 923.45pt>
+ [11 <./files/add_zero.jpg> <./files/add_2ff.jpg>]
+<files/switch_down.jpg, id=76, 1231.60126pt x 923.45pt>
 File: files/switch_down.jpg Graphic file (type jpg)
 <use files/switch_down.jpg>
-Package pdftex.def Info: files/switch_down.jpg  used on input line 351.
+Package pdftex.def Info: files/switch_down.jpg  used on input line 352.
 (pdftex.def)             Requested size: 232.53001pt x 174.34415pt.
-<files/switch_up.jpg, id=73, 1296.845pt x 972.63374pt>
+<files/switch_up.jpg, id=77, 1296.845pt x 972.63374pt>
 File: files/switch_up.jpg Graphic file (type jpg)
 <use files/switch_up.jpg>
-Package pdftex.def Info: files/switch_up.jpg  used on input line 357.
+Package pdftex.def Info: files/switch_up.jpg  used on input line 358.
 (pdftex.def)             Requested size: 232.53001pt x 174.39867pt.
- [11 <./files/add_zero.jpg> <./files/add_2ff.jpg>] ("C:\Program Files\MiKTeX 2.
-9\tex\latex\listings\lstlang1.sty"
+ [12 <./files/switch_down.jpg> <./files/switch_up.jpg>]
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) (files/test.py) (files/test.py) [12 <./files/switch_down.jpg> <./files/switch
-_up.jpg>] (ece559report_group.aux)
+) (files/test.py) (files/test.py) [13] (ece559report_group.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -488,7 +489,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5278 strings out of 493308
  78718 string characters out of 3138764
- 171482 words of memory out of 3000000
+ 170108 words of memory out of 3000000
  8745 multiletter control sequences out of 15000+200000
  11475 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -504,9 +505,9 @@ e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
 Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ece559report_group.pdf (13 pages, 1408066 bytes).
+Output written on ece559report_group.pdf (14 pages, 1409528 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
